@@ -5,14 +5,15 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+  coreTemplate:
+    spec:
+      replicas: {{ .Values.replicaCount.core }}
+  replicantTemplate:
+    spec:
+        replicas: {{ .Values.replicaCount.replicant }}
   listenersServiceTemplate:
     spec:
       type: {{ .Values.service.type }}
   dashboardServiceTemplate:
     spec:
       type: {{ .Values.service.type }}
-  coreTemplate:
-    metadata:
-       labels:
-         apps.kubernetes.io/managed-by: Helm
-         apps.kubernetes.io/instance: emqx

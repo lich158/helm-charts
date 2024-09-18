@@ -1,0 +1,42 @@
+apiVersion: "clickhouse.altinity.com/v1"
+kind: "ClickHouseInstallation"
+metadata:
+  name:    {{ .Release.Name }} #clickhouse
+  namespace:   {{ .Release.Namespace }} # alt-clickhouse  
+spec:
+  defaults:
+    templates:
+      dataVolumeClaimTemplate: data-volume-template
+      serviceTemplate: service-template
+  configuration:
+    zookeeper:
+      nodes:
+      - host: {{ .Values.spec.configuration.zookeeper.nodes.host }}
+    users:
+      admin/password: {{ .Values.spec.configuration.users.adminpassword }}
+      admin/networks/ip: 
+        - {{ .Values.spec.configuration.users.ip }}
+    clusters:
+      - name: clickhouse
+        layout:
+          shardsCount: {{ .Values.spec.configuration.clusters.layout.shardsCount }}
+          replicasCount: {{ .Values.spec.configuration.clusters.layout.replicasCount }}
+  templates:
+    serviceTemplates:
+    - name: service-template
+      generateName: "service-{chi}"
+      spec:
+        ports:
+        - name: http
+          port: 8123
+        - name: tcp
+          port: 9000
+        type: NodePort
+    volumeClaimTemplates:
+    - name: data-volume-template
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.spec.templates.volumeClaimTemplates.spec.resources.requests.storage }}
