@@ -1,0 +1,14 @@
+{{- if .Values.persistentVolumeClaim.enabled  }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.persistentVolumeClaim.claimName| default (include "dind.fullname" .) }}
+  labels:
+    {{- include "dind.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+{{ end }}
