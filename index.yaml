@@ -11,6 +11,17 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/clickhouse-cluster-0.1.1/clickhouse-cluster-0.1.1.tgz
     version: 0.1.1
+  dind:
+  - apiVersion: v2
+    appVersion: 27.2.1-dind
+    created: "2024-09-18T06:29:49.772390619Z"
+    description: A Helm chart for Kubernetes
+    digest: 82cb2a0d525620185f215abc6bf1c399a8a8db3b8561e793520f78d8edadafc0
+    name: dind
+    type: application
+    urls:
+    - https://github.com/lich158/helm-charts/releases/download/dind-0.1.0/dind-0.1.0.tgz
+    version: 0.1.0
   emqx-core:
   - apiVersion: v2
     appVersion: "5.0"
@@ -45,4 +56,4 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/nacos-0.1.5/nacos-0.1.5.tgz
     version: 0.1.5
-generated: "2024-09-18T06:10:49.409751509Z"
+generated: "2024-09-18T06:29:49.772400668Z"
