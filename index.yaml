@@ -14,6 +14,16 @@ entries:
   emqx-core:
   - apiVersion: v2
     appVersion: "5.0"
+    created: "2024-09-18T06:10:49.409739998Z"
+    description: A Helm chart for Kubernetes
+    digest: 15b5cf3e2fd82c142dae1616e7e6cb45aac07c37c383fc1b3d91cf3db7edabec
+    name: emqx-core
+    type: application
+    urls:
+    - https://github.com/lich158/helm-charts/releases/download/emqx-core-0.1.1/emqx-core-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: "5.0"
     created: "2024-09-13T02:33:34.683704952Z"
     description: A Helm chart for Kubernetes
     digest: 40a8bf787e9c6200574bfde8e8669360d2e64adf9586f7da91854a003f3005eb
@@ -35,4 +45,4 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/nacos-0.1.5/nacos-0.1.5.tgz
     version: 0.1.5
-generated: "2024-09-18T05:55:02.536919258Z"
+generated: "2024-09-18T06:10:49.409751509Z"
