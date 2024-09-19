@@ -11,16 +11,16 @@ spec:
   configuration:
     zookeeper:
       nodes:
-      - host: {{ .Values.spec.configuration.zookeeper.nodes.host }}
+      - host: {{ .Values.zkhost }}
     users:
-      admin/password: {{ .Values.spec.configuration.users.adminpassword }}
+      admin/password: {{ .Values.adminpassword }}
       admin/networks/ip: 
-        - {{ .Values.spec.configuration.users.ip }}
+        - {{ .Values.allowedip }}
     clusters:
       - name: clickhouse
         layout:
-          shardsCount: {{ .Values.spec.configuration.clusters.layout.shardsCount }}
-          replicasCount: {{ .Values.spec.configuration.clusters.layout.replicasCount }}
+          shardsCount: {{ .Values.clusters.shardsCount }}
+          replicasCount: {{ .Values.clusters.replicasCount }}
   templates:
     serviceTemplates:
     - name: service-template
@@ -39,4 +39,4 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: {{ .Values.spec.templates.volumeClaimTemplates.spec.resources.requests.storage }}
+            storage: {{ .Values.volumeClaimTemplates.storage }}
