@@ -19,8 +19,8 @@ spec:
     clusters:
       - name: clickhouse
         layout:
-          shardsCount: {{ .Values.clusters.layout.shardsCount }}
-          replicasCount: {{ .Values.clusters.layout.replicasCount }}
+          shardsCount: {{ .Values.clusters.shardsCount }}
+          replicasCount: {{ .Values.clusters.replicasCount }}
   templates:
     serviceTemplates:
     - name: service-template
