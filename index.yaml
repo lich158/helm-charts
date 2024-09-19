@@ -66,6 +66,16 @@ entries:
   dind:
   - apiVersion: v2
     appVersion: 27.2.1-dind
+    created: "2024-09-19T06:19:58.93179687Z"
+    description: A Helm chart for Kubernetes
+    digest: 766ac5ab00b455df12569118d78fe80248a80f118a25af06859d0d47b4736da1
+    name: dind
+    type: application
+    urls:
+    - https://github.com/lich158/helm-charts/releases/download/dind-0.1.1/dind-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 27.2.1-dind
     created: "2024-09-18T06:29:49.772390619Z"
     description: A Helm chart for Kubernetes
     digest: 82cb2a0d525620185f215abc6bf1c399a8a8db3b8561e793520f78d8edadafc0
@@ -118,4 +128,4 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/nacos-0.1.5/nacos-0.1.5.tgz
     version: 0.1.5
-generated: "2024-09-19T06:11:19.977659083Z"
+generated: "2024-09-19T06:19:58.931815996Z"
