@@ -11,11 +11,11 @@ spec:
   configuration:
     zookeeper:
       nodes:
-      - host: {{ .Values.zk-host }}
+      - host: {{ .Values.zkhost }}
     users:
       admin/password: {{ .Values.adminpassword }}
       admin/networks/ip: 
-        - {{ .Values.allowed-ip }}
+        - {{ .Values.allowedip }}
     clusters:
       - name: clickhouse
         layout:
