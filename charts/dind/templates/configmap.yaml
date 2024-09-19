@@ -5,8 +5,9 @@ metadata:
   labels:
     {{- include "dind.labels" . | nindent 4 }}
 data:  
-  {{- $files := .Files }}
-  {{- range tuple "daemon.json" }}
-  {{ . }}: |-
-        {{ $files.Get . }}
-  {{- end }}
+  daemon.json: |-  
+    {  
+      "insecure-registries": [
+        "{{ .Values.insecureRegistries }}"
+      ]
+    } 

@@ -21,7 +21,7 @@ podSecurityContext: {}
   # fsGroup: 2000
 
 securityContext:
-  # privileged: true
+  privileged: true
   # capabilities:
   #   drop:
   #   - ALL
@@ -32,8 +32,9 @@ securityContext:
 service:
   type: NodePort
   port: 2375
-  nodeport: 30010
+  nodeport: 30011
 
+insecureRegistries: "192.168.1.204:30002"
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
