@@ -77,7 +77,7 @@ resources:
   limits:
     cpu: 100m
     memory: 128Mi
-    "nvidia.com/gpu": 1
+    gpu: "1"
   requests:
     cpu: 100m
     memory: 128Mi
