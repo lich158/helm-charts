@@ -22,6 +22,17 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/altinity-clickhouse-operator-0.23.7/altinity-clickhouse-operator-0.23.7.tgz
     version: 0.23.7
+  bcsu:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-10-11T06:36:42.183466511Z"
+    description: A Helm chart for Kubernetes
+    digest: fc4e3312d8bf29caa9237f9dcbc2ab6777ab166084a07471661b9f7a7ccd17cf
+    name: bcsu
+    type: application
+    urls:
+    - https://github.com/lich158/helm-charts/releases/download/bcsu-0.1.0/bcsu-0.1.0.tgz
+    version: 0.1.0
   clickhouse-cluster:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -128,4 +139,4 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/nacos-0.1.5/nacos-0.1.5.tgz
     version: 0.1.5
-generated: "2024-09-19T06:19:58.931815996Z"
+generated: "2024-10-11T06:36:42.183491017Z"
