@@ -4,6 +4,7 @@ metadata:
   name: {{ include "fcu.fullname" . }}
   labels:
     {{- include "fcu.labels" . | nindent 4 }}
+    {{ .Release.Namespace}}: {{ include "fcu.fullname" . }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
