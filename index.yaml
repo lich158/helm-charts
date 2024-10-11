@@ -126,6 +126,17 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/emqx-core-0.1.0/emqx-core-0.1.0.tgz
     version: 0.1.0
+  fcu:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-10-11T06:39:10.974738445Z"
+    description: A Helm chart for Kubernetes
+    digest: 0f8453020763f65a681c7fe7c5640fa2188e96b6208c2b6a991ff49003773a3d
+    name: fcu
+    type: application
+    urls:
+    - https://github.com/lich158/helm-charts/releases/download/fcu-0.1.0/fcu-0.1.0.tgz
+    version: 0.1.0
   nacos:
   - apiVersion: v1
     appVersion: "1.0"
@@ -139,4 +150,4 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/nacos-0.1.5/nacos-0.1.5.tgz
     version: 0.1.5
-generated: "2024-10-11T06:36:42.183491017Z"
+generated: "2024-10-11T06:39:10.974763161Z"
