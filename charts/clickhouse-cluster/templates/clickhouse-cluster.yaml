@@ -8,10 +8,8 @@ spec:
     templates:
       dataVolumeClaimTemplate: data-volume-template
       serviceTemplate: service-template
+      podTemplate: pod-template-resource-limit
   configuration:
-    zookeeper:
-      nodes:
-      - host: {{ .Values.zkhost }}
     users:
       admin/password: {{ .Values.adminpassword }}
       admin/networks/ip: 
@@ -22,6 +20,17 @@ spec:
           shardsCount: {{ .Values.clusters.shardsCount }}
           replicasCount: {{ .Values.clusters.replicasCount }}
   templates:
+    podTemplate:
+      - name: pod-template-resource-limit
+        spec:
+          containers:
+            resources:
+                requests:
+                  memory: {{ .Values.podtemplate.requestsmem }}
+                  cpu: {{ .Values.podtemplate.requestscpu }}
+                limits:
+                  memory: {{ .Values.podtemplate.limitsmem }}
+                  cpu:  {{ .Values.podtemplate.limitscpu }}
     serviceTemplates:
     - name: service-template
       generateName: "service-{chi}"
