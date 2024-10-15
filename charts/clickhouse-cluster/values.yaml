@@ -2,7 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-zkhost: zk-cs-zookeep-cluster.alt-clickhouse
 adminpassword: clickhouse
 allowedip: 0.0.0.0/0
 clusters:
@@ -10,3 +9,8 @@ clusters:
     replicasCount: 2
 volumeClaimTemplates:
   storage: 8Gi
+podtemplate:
+  requestsmem: 4Gi
+  requestscpu: 1
+  limitsmem: 16Gi
+  limitscpu: 6
