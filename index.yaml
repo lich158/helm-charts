@@ -36,6 +36,16 @@ entries:
   clickhouse-cluster:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-10-16T07:06:07.540818069Z"
+    description: A Helm chart for Kubernetes
+    digest: bcd7c311a8b18bb764f51f198cf59dca383c2a4f5e3b3a64e556d9250bcd7c22
+    name: clickhouse-cluster
+    type: application
+    urls:
+    - https://github.com/lich158/helm-charts/releases/download/clickhouse-cluster-0.1.8/clickhouse-cluster-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-10-16T03:47:08.327456716Z"
     description: A Helm chart for Kubernetes
     digest: e33941eb39ad64b35523e9029200f89cdb21d52d8e382e60755f0ed9e5b12c96
@@ -190,4 +200,4 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/nacos-0.1.5/nacos-0.1.5.tgz
     version: 0.1.5
-generated: "2024-10-16T03:47:08.327498785Z"
+generated: "2024-10-16T07:06:07.54088823Z"
