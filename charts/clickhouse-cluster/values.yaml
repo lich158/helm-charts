@@ -14,3 +14,6 @@ podtemplate:
   requestscpu: 1
   limitsmem: 16Gi
   limitscpu: 6
+configpro:
+  readonly: "1"
+  maxmemory: "22032385536"

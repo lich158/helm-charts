@@ -10,6 +10,9 @@ spec:
       serviceTemplate: service-template
       podTemplate: pod-template-resource-limit
   configuration:
+    profiles:
+      readonly/readonly: {{ .Values.configpro.readonly }}
+      default/max_memory_usage: {{ .Values.configpro.maxmemory }}
     users:
       admin/password: {{ .Values.adminpassword }}
       admin/networks/ip: 
