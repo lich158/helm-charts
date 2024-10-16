@@ -37,6 +37,12 @@ spec:
                 limits:
                   memory: {{ .Values.podtemplate.limitsmem }}
                   cpu:  {{ .Values.podtemplate.limitscpu }}
+    podDistribution:
+      - type: ShardAntiAffinity
+      - type: ReplicaAntiAffinity
+      - type: MaxNumberPerNode
+        number: {{ .Values.podDistribution.number }}
+        topologyKey: "kubernetes.io/hostname"
     serviceTemplates:
     - name: service-template
       generateName: "service-{chi}"
@@ -52,6 +58,7 @@ spec:
       spec:
         accessModes:
         - ReadWriteOnce
+        storageClassName: {{ .Values.volumeClaimTemplates.storageclassname }}
         resources:
           requests:
             storage: {{ .Values.volumeClaimTemplates.storage }}

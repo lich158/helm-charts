@@ -9,6 +9,7 @@ clusters:
     shardsCount: 2
     replicasCount: 2
 volumeClaimTemplates:
+  storageclassname: nfs-client
   storage: 8Gi
 podtemplate:
   requestsmem: 4Gi
@@ -18,3 +19,5 @@ podtemplate:
 configpro:
   readonly: "1"
   maxmemory: "22032385536"
+podDistribution:
+  number: 2
