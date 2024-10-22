@@ -169,6 +169,16 @@ entries:
   fcu:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2024-10-22T02:06:31.310426726Z"
+    description: A Helm chart for Kubernetes
+    digest: 3d9147ab6885a8d86c3902befbc9f12923b7c5b0447c399685c719858e237130
+    name: fcu
+    type: application
+    urls:
+    - https://github.com/lich158/helm-charts/releases/download/fcu-0.1.2/fcu-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2024-10-11T09:07:15.664384273Z"
     description: A Helm chart for Kubernetes
     digest: 33d2455bc8418fc76c8c831767dc33aa631d5e68e6935417853f0a4a3813caae
@@ -200,4 +210,4 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/nacos-0.1.5/nacos-0.1.5.tgz
     version: 0.1.5
-generated: "2024-10-16T07:06:07.54088823Z"
+generated: "2024-10-22T02:06:31.310460138Z"
