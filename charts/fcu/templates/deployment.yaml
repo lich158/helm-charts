@@ -44,7 +44,19 @@ spec:
           readinessProbe:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- if .Values.resources }}
+            {{- with .Values.resources }}
+            limits:
+              cpu: {{ .limits.cpu }}
+              memory: {{ .limits.memory }}
+              {{- if .limits.gpu }}
+              nvidia.com/gpu: {{ .limits.gpu | quote }}
+              {{- end }}
+            requests:
+              cpu: {{ .requests.cpu }}
+              memory: {{ .requests.memory }}
+            {{- end }}
+            {{- end }}              
           volumeMounts:
           - mountPath: /app/data
             name: data          
