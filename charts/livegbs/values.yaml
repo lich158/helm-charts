@@ -19,7 +19,7 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-namespace: livegbs-system-1
+namespace: livegbs-system
 
 serviceAccount:
   # Specifies whether a service account should be created
