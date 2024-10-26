@@ -197,6 +197,17 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/fcu-0.1.0/fcu-0.1.0.tgz
     version: 0.1.0
+  livegbs:
+  - apiVersion: v2
+    appVersion: v3.4.9
+    created: "2024-10-26T06:18:40.21694913Z"
+    description: A Helm chart for Kubernetes
+    digest: b183d1f5fb5881868405ba841aa5081f581dfdb807b22985bb79ae3025c7e690
+    name: livegbs
+    type: application
+    urls:
+    - https://github.com/lich158/helm-charts/releases/download/livegbs-0.1.0/livegbs-0.1.0.tgz
+    version: 0.1.0
   nacos:
   - apiVersion: v1
     appVersion: "1.0"
@@ -210,4 +221,4 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/nacos-0.1.5/nacos-0.1.5.tgz
     version: 0.1.5
-generated: "2024-10-22T02:06:31.310460138Z"
+generated: "2024-10-26T06:18:40.216984786Z"
