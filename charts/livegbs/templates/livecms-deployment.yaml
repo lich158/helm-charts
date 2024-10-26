@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.image.livecms.name }}-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "livegbs.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "livegbs.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "livegbs.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      nodeSelector: 
+        liveGBS: {{ .Values.nodeSelector.liveGBS }}
+      containers:
+        - name: {{ .Values.image.livecms.name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          env:
+          - name: LIVESMS_HOST_IP
+            value: {{ .Values.livegbs.env.LIVESMS_HOST_IP |quote }}
+          - name: LIVECMS_HOST_IP
+            value: {{ .Values.livegbs.env.LIVECMS_HOST_IP |quote }}
+          - name: RECORD_DIR
+            value: {{ .Values.livegbs.env.RECORD_DIR |quote }}
+          image: {{ .Values.image.livecms.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            {{- range .Values.livecms.service.ports }}
+            - containerPort: {{ .port }}
+              protocol: {{ .protocol }}
+            {{- end }}            
+          livenessProbe:
+            {{- toYaml .Values.livecms.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.livecms.readinessProbe | nindent 12 }}          
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: livecms
+              mountPath: "/app/LiveCMS/livecms.ini"
+              subPath: "livecms.ini"             
+      volumes:
+      - name: livecms
+        configMap:
+          name: livecms-configmap
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

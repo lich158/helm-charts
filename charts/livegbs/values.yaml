@@ -1,0 +1,174 @@
+# Default values for livegbs.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  livecms:
+    repository: 192.168.1.154:30002/library/livecms
+    name: livecms
+  livesms:
+    repository: 192.168.1.154:30002/library/livesms
+    name: livesms
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v3.4.9"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+namespace: livegbs-system-1
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: 
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+  privileged: true
+
+
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: 
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 3000m
+    memory: 4096Mi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+
+service:
+  type: ClusterIP
+  port: 10000
+
+livecms:
+  service:
+    type: NodePort
+    ports:
+      - name: http
+        port: 30500
+        protocol: TCP
+      - name: http-udp
+        port: 30500
+        protocol: UDP
+      - name: sip
+        port: 30501
+        protocol: TCP
+      - name: sip-udp
+        port: 30501
+        protocol: UDP
+      - name: redis
+        port: 30502
+        protocol: TCP
+  configmap:
+    http:
+      port: 30500
+    redis:
+      port: 30502
+    sip:
+      port: 30501          
+  readinessProbe:
+    httpGet:
+      path: /api/v1/getserverinfo
+      port: 30500
+      initialDelaySeconds: 5
+      periodSeconds: 5
+livesms:
+  service:
+    type: NodePort
+    ports: 30568
+    length: 30 
+      # - start: 30506
+      #   end: 30568
+      #   leng: 30
+  configmap:
+    http:
+      port: 30503
+    redis:
+      port: 30501
+      host: 192.168.1.163  
+    sip:
+      port: 30505
+      host: 192.168.1.163      
+    rtp:
+      tcp_port_range: 30506,30536
+      udp_port_range: 30506,30536
+    webrtc:
+      udp_port_range: 30537,30568
+    record:
+      dir: "/app/liveSMS/record"
+
+someInteger1: 30     
+
+livegbs:
+  env:
+    LIVESMS_HOST_IP: "192.168.1.163"
+    LIVECMS_HOST_IP: "192.168.1.163"
+    RECORD_DIR: "/app/record"
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# Additional volumes on the output Deployment definition.
+volumes: []
+# - name: foo
+#   secret:
+#     secretName: mysecret
+#     optional: false
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts: []
+# - name: foo
+#   mountPath: "/etc/foo"
+#   readOnly: true
+
+nodeSelector: 
+  liveGBS: "true"
+
+tolerations: []
+
+affinity: {}

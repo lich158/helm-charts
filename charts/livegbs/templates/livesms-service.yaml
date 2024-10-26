@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.image.livesms.name }}-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "livegbs.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.livesms.service.type }}
+  ports:
+    {{- $numbers := (until 30) }} 
+    {{- range $port, $ := $numbers }}
+    - name: prtp-tcp-{{ add $port 30506 }}
+      port: {{ add $port 30506 }}
+      targetPort: {{ add $port 30506 }}
+      nodePort: {{ add $port 30506 }}
+      protocol: TCP
+    - name: prtp-udp-{{ add $port 30506 }}
+      port: {{ add $port 30506 }}
+      targetPort: {{ add $port 30506 }}
+      nodePort: {{ add $port 30506 }}
+      protocol: UDP      
+    - name: webrtc-{{ add $port 30536 }}
+      port: {{ add $port 30536 }}
+      targetPort: {{ add $port 30536 }}
+      nodePort: {{ add $port 30536 }}
+      protocol: UDP      
+    {{- end }}
+  selector:
+    {{- include "livegbs.selectorLabels" . | nindent 4 }}
+    

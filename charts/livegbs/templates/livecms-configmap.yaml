@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.image.livecms.name }}-configmap
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "livegbs.labels" . | nindent 4 }}
+data:  
+  livecms.ini: |-
+    license_version=5
+
+    [http]
+    port={{ .Values.livecms.configmap.http.port }}
+    ; 接口鉴权开关(0-关闭, 1-开启)
+    api_auth=1
+    ; 流地址鉴权开关(0-关闭, 1-开启)
+    live_stream_auth=0
+    ; 登录图形验证码开关(0-关闭, 1-开启)
+    captcha=0
+    ; 连续登录错误次数限制
+    login_error_limit=5
+    ; 达到连续登录错误次数限制时, 锁定登录(正数-锁定秒数, 0-不锁定, 负数-锁定且不设超时), 解锁方法 --> https://www.liveqing.com/docs/faq/LiveGBS.html#解锁登录
+    login_error_lock=0
+    ; 标题配置
+    logo_text=LiveGBS
+    ; 短标题配置
+    logo_mini_text=GBS
+    ; 版权配置
+    copyright_text=Copyright © 2024 <a href="//www.liveqing.com" target="_blank">www.liveqing.com</a> All rights reserved.
+
+    [https]
+    ; 可选配置开启 HTTPS 服务
+    ; port=10010
+    ; ssl_domain=localhost
+    ; ssl_cert_file=ssl/localhost_cert.pem
+    ; ssl_key_file=ssl/localhost_key.pem
+    ; ssl_min_version=1.2
+
+    [redis]
+    port={{ .Values.livecms.configmap.redis.port }}
+    password=livegbs@2024
+
+    [db]
+    ; 可选使用 Mariadb 数据库, 建库sql --> https://www.liveqing.com/docs/faq/LiveGBS.html#切换数据库
+    ; dialect=mysql
+    ; url=username:password@(ip:port)/livegbs?charset=utf8mb4&parseTime=True&loc=Local
+
+    [sip]
+    ; CMS SIP 服务器 IP/域名(必填)
+    host={{ .Values.livecms.configmap.sip.host }}
+    port={{ .Values.livecms.configmap.sip.port }}
+    serial=34020000002000000001
+    realm=3402000000
+    ; 应答超时(秒)
+    ack_timeout=15
+    ; 保活超时(秒)
+    keepalive_timeout=300
+    ; GB28281 设备接入统一密码, 如果不配置统一密码, 就需要逐个将设备认证信息录入数据库
+    device_password=12345678
+    ; 校时源,配置上级国标ID/NTP(可选)
+    time_server=
+    ; 禁止接入IP列表, 多条逗号间隔(可选)
+    forbid_ip_list=
+    ; 禁止接入User-Agent列表, 多条逗号间隔(可选)
+    forbid_ua_list=Conaito,PBX,Phone,Grandstream,eyeBeam,Voip,Avaya,Cisco,Polycom,friendly-scanner,pplsip,Aastra,erafsadfasfa,Samsung,Linksys,X-Lite
+    ; 配置正则表达式, 只允许符合规则的国标编号注册
+    ; register_serial_reg=^\d{10,20}$
+    ; 配置正则表达式, 只允许符合规则的User-Agent注册
+    ; register_ua_reg=^IP Camera$
+    ; 信令日志开关(0-关闭, 1-开启)
+    log=1
+    ; 是否允许直播地址拉流(0-关闭, 1-开启)
+    allow_stream_start_by_url=1
+    ; 设备默认流传输(UDP/TCP)
+    device_default_media_transport=UDP
+    ; 设备默认流传输模式(passive/active)
+    device_default_media_transport_mode=passive
+    ; 通道默认按需开关(0-关闭, 1-开启)
+    channel_default_ondemand=1
+    ; 通道默认云端录像开关(0-关闭, 1-开启)
+    channel_default_cloud_record=0
+    ; 报警数据保留(天, 0 表示不接收报警)
+    alarm_reserve_days=3
+    ; 操作日志数据保留(天, 0 表示不保存操作日志)
+    log_reserve_days=3
+    ; 在线状态变更记录保留(天, 0 表示不保存在线状态变更记录)
+    status_log_reserve_days=7
+    ; 移动轨迹记录保留(天, 0 表示不保存移动轨迹记录)
+    position_log_reserve_days=7
+    ; 播放鉴权第三方回调地址, HTTP GET, 请求参数(透传流地址参数, app, call, name), 响应(200 - 鉴权通过, 其它 - 鉴权不通过)
+    ; 比如 http://demo.liveqing.com:10000/api/v1/check/stream/auth
+    stream_auth_url=
+
+    [map]
+    ; 电子地图开关(0-关闭, 1-开启)
+    enable=0
+    ; 地图中心点(经度,纬度)
+    center=117.30592,32.01789
+
+    [xdb]
+    ; 可选IP地址定位库, 下载 --> https://gitee.com/lionsoul/ip2region/raw/master/data/ip2region.xdb
+    file=
+
+    [service]
+    name=LiveCMS_Service
+    display_name=LiveCMS_Service
+    description=LiveCMS_Service
