@@ -6,10 +6,10 @@ replicaCount: 1
 
 image:
   livecms:
-    repository: 192.168.1.154:30002/library/livecms
+    repository: tiexiang.io/library/livecms
     name: livecms
   livesms:
-    repository: 192.168.1.154:30002/library/livesms
+    repository: tiexiang.io/library/livesms
     name: livesms
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
