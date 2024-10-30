@@ -2,7 +2,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Values.image.livecms.name }}-configmap
-  namespace: {{ .Values.namespace }}
   labels:
     {{- include "livegbs.labels" . | nindent 4 }}
 data:  
@@ -47,7 +46,7 @@ data:
 
     [sip]
     ; CMS SIP 服务器 IP/域名(必填)
-    host={{ .Values.livecms.configmap.sip.host }}
+    host={{ .Values.livegbs.ip }}
     port={{ .Values.livecms.configmap.sip.port }}
     serial=34020000002000000001
     realm=3402000000

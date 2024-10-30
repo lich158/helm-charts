@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.image.livecms.name }}-deployment
-  namespace: {{ .Values.namespace }}
   labels:
+    app: livecms
     {{- include "livegbs.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -11,6 +11,7 @@ spec:
   {{- end }}
   selector:
     matchLabels:
+      app: livecms
       {{- include "livegbs.selectorLabels" . | nindent 6 }}
   template:
     metadata:
@@ -19,6 +20,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
+        app: livecms
         {{- include "livegbs.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
@@ -33,7 +35,7 @@ spec:
       containers:
         - name: {{ .Values.image.livecms.name }}
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
+            privileged: true   
           env:
           - name: LIVESMS_HOST_IP
             value: {{ .Values.livegbs.env.LIVESMS_HOST_IP |quote }}
@@ -42,7 +44,7 @@ spec:
           - name: RECORD_DIR
             value: {{ .Values.livegbs.env.RECORD_DIR |quote }}
           image: {{ .Values.image.livecms.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}      
           ports:
             {{- range .Values.livecms.service.ports }}
             - containerPort: {{ .port }}
