@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.image.livesms.name }}-deployment
+  labels:
+    app: livesms
+    {{- include "livegbs.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app: livesms
+      {{- include "livegbs.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: livesms
+        {{- include "livegbs.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      nodeSelector: 
+        liveGBS: {{ .Values.nodeSelector.liveGBS }}
+      containers:
+        - name: {{ .Values.image.livesms.name }}
+          securityContext:
+            privileged: true   
+          env:
+          - name: LIVESMS_HOST_IP
+            value: {{ .Values.livegbs.env.LIVESMS_HOST_IP |quote }}
+          - name: LIVECMS_HOST_IP
+            value: {{ .Values.livegbs.env.LIVECMS_HOST_IP |quote }}
+          - name: RECORD_DIR
+            value: {{ .Values.livegbs.env.RECORD_DIR |quote }}        
+          image: {{ .Values.image.livesms.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}                 
+          ports:            
+            {{- $numbers := (until (int .Values.livesms.service.length )) }} 
+            {{- range $port, $ := $numbers }}
+            - containerPort: {{ add $port 30503 }}
+              protocol: TCP
+            - containerPort: {{ add $port 30533 }}
+              protocol: UDP
+            {{- end }}            
+          livenessProbe:
+            {{- toYaml .Values.livesms.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.livesms.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: livesms
+              mountPath: "/app/LiveSMS/livesms.ini"
+              subPath: "livesms.ini"
+      volumes:
+      - name: livesms
+        configMap:
+          name: livesms-configmap      
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
