@@ -5,4 +5,53 @@ metadata:
   labels:
     {{- include "fcu.labels" . | nindent 4 }}
 data:  
-  config.json: {{ .Values.configMap.data | quote }} 
+  {{- /* 直接读取完整string中的数据 */ -}}
+  {{- $data := .Values.configMap.data | fromJson }}
+  config.json: |-
+    {
+        "Device": {
+            "DeviceClass": {{ $data.Device.DeviceClass | quote}},
+            "FCUNum": {{ $data.Device.FCUNum | quote}},
+            "LineCode": {{ $data.Device.LineCode | quote}},
+            "Manufacturer": {{ $data.Device.Manufacturer | quote}},
+            "ScopeClass": {{ $data.Device.ScopeClass | quote}}
+        },
+        "Level2Seconds": {
+            "0": {{ index $data.Level2Seconds "0" }},
+            "1": {{ index $data.Level2Seconds "1" }},
+            "2": {{ index $data.Level2Seconds "2" }},
+            "3": {{ index $data.Level2Seconds "3" }},
+            "4": {{ index $data.Level2Seconds "4" }},
+            "5": {{ index $data.Level2Seconds "5" }},
+            "6": {{ index $data.Level2Seconds "6" }}            
+        },
+        "Logger": {
+            "Level": "INFO",
+            "LogDir": "log"
+        },
+        "MQTTClient": {
+            "CertFile": {{ $data.MQTTClient.CertFile | quote}},
+            "Host": {{ $data.MQTTClient.Host | quote}},
+            "Password": {{ $data.MQTTClient.Password | quote}},
+            "Port": {{ $data.MQTTClient.Port | quote}},
+            "Username": {{ $data.MQTTClient.Username | quote}}
+        },
+        "MinioClient": {
+            "AccessKey": {{ $data.MinioClient.AccessKey | quote}},
+            "CertCheck": {{ $data.MinioClient.CertCheck | quote}},
+            "Endpoint": {{ $data.MinioClient.Endpoint | quote}},
+            "ExpirationDays": {{ $data.MinioClient.ExpirationDays | quote}},
+            "ExpirationLevel": {{ $data.MinioClient.ExpirationLevel | quote}},
+            "SecretKey": {{ $data.MinioClient.SecretKey | quote}}
+        },
+        "RPCServer": {
+            "IP": "127.0.0.1",
+            "Port": "9999"
+        },
+        "Scene": {
+            "BCSUNum": {{ $data.Scene.BCSUNum | quote}},
+            "CompanyCode":  {{ $data.Scene.CompanyCode | quote}},
+            "SceneClass":  {{ $data.Scene.SceneClass | quote}},
+            "StationCode":  {{ $data.Scene.StationCode | quote}}
+        }
+    }
