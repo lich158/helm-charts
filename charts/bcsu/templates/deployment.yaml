@@ -54,8 +54,6 @@ spec:
           volumeMounts:
           - mountPath: /app/config
             name: config
-          - mountPath: /app/logs
-            name: log
           {{- with .Values.volumeMounts }}                      
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -64,15 +62,6 @@ spec:
           defaultMode: 420
           name: {{ include "bcsu.fullname" . }}
         name: config
-      - name: log
-        {{- with .Values.persistentVolumeClaim }}
-        {{- if .enabled }}
-        persistentVolumeClaim:
-          claimName: {{ .claimName | default  (include "bcsu.fullname" $) }}
-        {{- else }}
-        emptyDir: {}
-        {{- end }}
-        {{- end }}           
       {{- with .Values.volumes }}            
         {{- toYaml . | nindent 8 }}
       {{- end }}
