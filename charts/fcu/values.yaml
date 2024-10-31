@@ -148,5 +148,3 @@ persistentVolumeClaim:
 
 configMap:
   data: '{"Device":{"DeviceClass":"Radar_Videos","FCUNum":"1836303989153767425","LineCode":"xgx","Manufacturer":"dapeng","ScopeClass":"ZhaLanJie"},"Level2Seconds":{"0":12000,"1":600,"2":300,"3":180,"4":60,"5":30,"6":10},"Logger":{"Level":"INFO","LogDir":"log"},"MQTTClient":{"CertFile":"","Host":"emqx-cluster-listeners.emqx-system","Password":"tx1726667868610","Port":"1883","Username":"nnj-yonganzhen-yaz014-1836303989153767425"},"MinioClient":{"AccessKey":"minio","CertCheck":"False","Endpoint":"minio.minio-system:443","SecretKey":"minio123"},"RPCServer":{"IP":"127.0.0.1","Port":"9999"},"Scene":{"BCSUNum":"yaz014","CompanyCode":"nnj","SceneClass":"KaiKuoDi","StationCode":"yonganzhen"}}'
-
-jsonString: '{"aa":"bb"}'
