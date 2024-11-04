@@ -85,9 +85,7 @@ spec:
             - mountPath: /app/config
               name: config
             - mountPath: /app/data
-              name: data
-            - mountPath: /app/log
-              name: log              
+              name: data           
           {{- with .Values.volumeMounts }}              
             {{- toYaml . | nindent 12 }}
           {{- end }}          
@@ -101,15 +99,6 @@ spec:
         {{- if .enabled }}
         persistentVolumeClaim:
           claimName: {{  .claimName | default (printf "%s-%s" (include "fcu.fullname" $) "data") }}
-        {{- else }}
-        emptyDir: {}
-        {{- end }}
-        {{- end }}
-      - name: log
-        {{- with .Values.persistentVolumeClaim.data }}
-        {{- if .enabled }}
-        persistentVolumeClaim:
-          claimName: {{  .claimName | default (printf "%s-%s" (include "fcu.fullname" $) "log") }}
         {{- else }}
         emptyDir: {}
         {{- end }}

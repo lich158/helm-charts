@@ -5,4 +5,25 @@ metadata:
   labels:
     {{- include "bcsu.labels" . | nindent 4 }}
 data:  
-  config.json: {{ .Values.configMap.data | quote }} 
+  {{- /* 直接读取完整string中的数据 */ -}}
+  {{- $data := .Values.configMap.data | fromJson }}
+  config.json: |-
+    {
+        "DBClient": {
+            "DBName": {{ $data.DBClient.DBName | quote }},
+            "DBTableName": {{ $data.DBClient.DBTableName | quote }},
+            "IP": {{ $data.DBClient.IP | quote }},
+            "Password": {{ $data.DBClient.Password | quote }},
+            "Port": {{ $data.DBClient.Port | quote }},
+            "User": {{ $data.DBClient.User | quote }}
+        },
+        "MQTTClient": {
+            "CertFile": {{ $data.MQTTClient.CertFile | quote }},
+            "Host": {{ $data.MQTTClient.Host | quote }},
+            "MqttPublishTopic": {{ $data.MQTTClient.MqttPublishTopic | quote }},
+            "MqttSubscribeTopic": {{ $data.MQTTClient.MqttSubscribeTopic | quote }},
+            "Password": {{ $data.MQTTClient.Password | quote }},
+            "Port": {{ $data.MQTTClient.Port | quote }},
+            "Username": {{ $data.MQTTClient.Username | quote }}
+        }
+    }

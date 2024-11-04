@@ -7,10 +7,10 @@ replicaCount: 1
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  name: tiexiang.io/tiexiang/bcsu-image:latest
+  name: tiexiang.io/bcsu/bcsu-image:latest
   repository: ""
   # This sets the pull policy for images.
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
@@ -91,15 +91,20 @@ volumeMounts: []
 #   readOnly: true
 
 persistentVolumeClaim:
-  enabled: ture
+  enabled: false
   storage: 500Mi
   # claimName: 
 
 nodeSelector: {}
 
+# bcsu调度到中心,fcu调度到边缘
+# 边缘只允许fcu调动，其他服务不允许调动到边缘
+# node-role.kubernetes.io/center-node
+# 边缘节点添加不可调度污点，fcu上添加该污点容忍
+# node-role.kubernetes.io/edge-node
 tolerations: []
 
 affinity: {}
 
 configMap:
-  data: "xx"
+  data: '{"DBClient":{"DBName":"default","DBTableName":"standard_message_nnj_yaz_yaz050","IP":"service-clickhouse-cluster.clickhouse-system","Password":"clickhouse","Port":"9000","User":"admin"},"MQTTClient":{"CertFile":"","Host":"emqx-cluster-listeners.emqx-system","MqttPublishTopic":"exception/AI","MqttSubscribeTopic":"device/nnj/yaz/yaz050","Password":"tx1729933221007","Port":"1883","Username":"nnj-yaz-yaz050"}}'

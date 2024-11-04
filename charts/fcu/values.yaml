@@ -9,10 +9,10 @@ replicaCount: 1
 publishServer: 
   # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
   image:
-    name: 192.168.1.204:30002/tiexiang/publish-server:v1.0.2
+    name: tiexiang.io/fcu-if/publish-server:v1.0.1
     repository: ""
     # This sets the pull policy for images.
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
   
@@ -21,9 +21,9 @@ publishServer:
 
 fcuServer:
   image:
-    name: 192.168.1.204:30002/dapeng/fcu-image-1726212168104:v2.0
+    name: tiexiang.io/dapeng/fcu-image-1729909396545:v1.0
     repository: ""
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
     tag: ""
   
   imagePullSecrets: []
@@ -115,17 +115,34 @@ volumeMounts: []
 
 nodeSelector: {}
 
-tolerations: []
+# bcsu调度到中心,fcu调度到边缘
+# 边缘只允许fcu调动，其他服务不允许调动到边缘
+# node-role.kubernetes.io/center-node
+# 边缘节点添加不可调度污点，fcu上添加该污点容忍
+# node-role.kubernetes.io/edge-node
+# tolerations: 
+#   - key: "node-role.tx.com"  
+#     operator: "Equal"  
+#     value: "edge-node"  
+#     effect: "NoSchedule"  
 
-affinity: {}
+# affinity:
+#   nodeAffinity:  
+#     requiredDuringSchedulingIgnoredDuringExecution:  
+#       nodeSelectorTerms:  
+#         - matchExpressions:  
+#             - key: "node-role.tx.com"  
+#               operator: In  
+#               values:  
+#                 - "edge-node"
 
 persistentVolumeClaim:
   data: 
-    enabled: true
-    storage: 10Gi
-  log: 
-    enabled: true
-    storage: 10Gi
+    enabled: false
+#     storage: 10Gi
+#   log: 
+#     enabled: true
+#     storage: 10Gi
   # claimName: 
 
 
