@@ -6,10 +6,10 @@ replicaCount: 1
 
 image:
   livecms:
-    repository: 192.168.1.154:30002/library/livecms
+    repository: tiexiang.io/library/livecms
     name: livecms
   livesms:
-    repository: 192.168.1.154:30002/library/livesms
+    repository: tiexiang.io/library/livesms
     name: livesms
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
@@ -18,8 +18,6 @@ image:
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
-
-namespace: livegbs-system
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -116,20 +114,30 @@ livecms:
 livesms:
   service:
     type: NodePort
-    ports: 30568
-    length: 30 
-      # - start: 30506
-      #   end: 30568
-      #   leng: 30
+    length: 30     
+    ports:
+      - name: http
+        port: 30503
+        protocol: TCP
+      - name: http-udp
+        port: 30503
+        protocol: UDP
+      - name: rtmp
+        port: 30504
+        protocol: TCP
+      - name: rtmp-udp
+        port: 30504
+        protocol: UDP
+      - name: sip
+        port: 30505
+        protocol: TCP
   configmap:
     http:
       port: 30503
     redis:
       port: 30501
-      host: 192.168.1.163  
     sip:
       port: 30505
-      host: 192.168.1.163      
     rtp:
       tcp_port_range: 30506,30536
       udp_port_range: 30506,30536
@@ -141,6 +149,7 @@ livesms:
 someInteger1: 30     
 
 livegbs:
+  ip: 192.168.2.4
   env:
     LIVESMS_HOST_IP: "192.168.1.163"
     LIVECMS_HOST_IP: "192.168.1.163"
