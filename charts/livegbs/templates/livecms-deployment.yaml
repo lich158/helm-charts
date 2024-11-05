@@ -31,7 +31,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       nodeSelector: 
-        liveGBS: {{ .Values.nodeSelector.liveGBS }}
+        {{ .Values.nodeSelector }}
       containers:
         - name: {{ .Values.image.livecms.name }}
           securityContext:

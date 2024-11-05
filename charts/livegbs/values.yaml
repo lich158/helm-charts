@@ -176,7 +176,7 @@ volumeMounts: []
 #   readOnly: true
 
 nodeSelector: 
-  liveGBS: "true"
+  kubernetes.io/hostname: worker1
 
 tolerations: []
 
