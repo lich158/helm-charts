@@ -210,6 +210,16 @@ entries:
   livegbs:
   - apiVersion: v2
     appVersion: v3.4.9
+    created: "2024-11-05T03:20:52.875701658Z"
+    description: A Helm chart for Kubernetes
+    digest: caf97ecab0cc6f6aecbec601dd7707a026f1fa5aeb37d492608f5585b163f4ac
+    name: livegbs
+    type: application
+    urls:
+    - https://github.com/lich158/helm-charts/releases/download/livegbs-0.1.4/livegbs-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: v3.4.9
     created: "2024-11-05T02:38:33.730509968Z"
     description: A Helm chart for Kubernetes
     digest: 56a4cdc345d05c9c7669ee3b6d12a87878158f7e7e3cb4e88ce94ac906b1882b
@@ -261,4 +271,4 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/nacos-0.1.5/nacos-0.1.5.tgz
     version: 0.1.5
-generated: "2024-11-05T02:38:33.730568186Z"
+generated: "2024-11-05T03:20:52.875777531Z"
