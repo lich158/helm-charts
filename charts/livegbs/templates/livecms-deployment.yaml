@@ -30,17 +30,15 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      nodeSelector: 
-        {{ .Values.nodeSelector }}
       containers:
         - name: {{ .Values.image.livecms.name }}
           securityContext:
             privileged: true   
           env:
           - name: LIVESMS_HOST_IP
-            value: {{ .Values.livegbs.env.LIVESMS_HOST_IP |quote }}
+            value: {{ .Values.livegbs.ip |quote }}
           - name: LIVECMS_HOST_IP
-            value: {{ .Values.livegbs.env.LIVECMS_HOST_IP |quote }}
+            value: {{ .Values.livegbs.ip |quote }}
           - name: RECORD_DIR
             value: {{ .Values.livegbs.env.RECORD_DIR |quote }}
           image: {{ .Values.image.livecms.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}

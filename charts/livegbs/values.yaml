@@ -6,10 +6,10 @@ replicaCount: 1
 
 image:
   livecms:
-    repository: tiexiang.io/library/livecms
+    repository: tiexiang.io/livegbs/livecms
     name: livecms
   livesms:
-    repository: tiexiang.io/library/livesms
+    repository: tiexiang.io/livegbs/livesms
     name: livesms
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
@@ -84,31 +84,31 @@ livecms:
     type: NodePort
     ports:
       - name: http
-        port: 30500
+        port: 30020
         protocol: TCP
       - name: http-udp
-        port: 30500
+        port: 30020
         protocol: UDP
       - name: sip
-        port: 30501
+        port: 30021
         protocol: TCP
       - name: sip-udp
-        port: 30501
+        port: 30021
         protocol: UDP
       - name: redis
-        port: 30502
+        port: 30022
         protocol: TCP
   configmap:
     http:
-      port: 30500
+      port: 30020
     redis:
-      port: 30502
+      port: 30022
     sip:
-      port: 30501          
+      port: 30021          
   readinessProbe:
     httpGet:
       path: /api/v1/getserverinfo
-      port: 30500
+      port: 30020
       initialDelaySeconds: 5
       periodSeconds: 5
 livesms:
@@ -117,32 +117,32 @@ livesms:
     length: 30     
     ports:
       - name: http
-        port: 30503
+        port: 30023
         protocol: TCP
       - name: http-udp
-        port: 30503
+        port: 30023
         protocol: UDP
       - name: rtmp
-        port: 30504
+        port: 30024
         protocol: TCP
       - name: rtmp-udp
-        port: 30504
+        port: 30024
         protocol: UDP
       - name: sip
-        port: 30505
+        port: 30025
         protocol: TCP
   configmap:
     http:
-      port: 30503
+      port: 30023
     redis:
-      port: 30501
+      port: 30022
     sip:
-      port: 30505
+      port: 30025
     rtp:
-      tcp_port_range: 30506,30536
-      udp_port_range: 30506,30536
+      tcp_port_range: 30026,30056
+      udp_port_range: 30026,30056
     webrtc:
-      udp_port_range: 30537,30568
+      udp_port_range: 30056,30086
     record:
       dir: "/app/liveSMS/record"
 
@@ -151,8 +151,6 @@ someInteger1: 30
 livegbs:
   ip: 192.168.2.4
   env:
-    LIVESMS_HOST_IP: "192.168.1.163"
-    LIVECMS_HOST_IP: "192.168.1.163"
     RECORD_DIR: "/app/record"
 
 autoscaling:
@@ -175,8 +173,8 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
-nodeSelector: 
-  kubernetes.io/hostname: worker1
+nodeSelector:
+  kubernetes.io/hostname: "worker2"
 
 tolerations: []
 

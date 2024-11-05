@@ -16,20 +16,20 @@ spec:
     {{- end }}
     {{- $numbers := (until 30) }} 
     {{- range $port, $ := $numbers }}
-    - name: prtp-tcp-{{ add $port 30506 }}
-      port: {{ add $port 30506 }}
-      targetPort: {{ add $port 30506 }}
-      nodePort: {{ add $port 30506 }}
+    - name: rtp-tcp-{{ add $port 30026 }}
+      port: {{ add $port 30026 }}
+      targetPort: {{ add $port 30026 }}
+      nodePort: {{ add $port 30026 }}
       protocol: TCP
-    - name: prtp-udp-{{ add $port 30506 }}
-      port: {{ add $port 30506 }}
-      targetPort: {{ add $port 30506 }}
-      nodePort: {{ add $port 30506 }}
+    - name: rtp-udp-{{ add $port 30026 }}
+      port: {{ add $port 30026 }}
+      targetPort: {{ add $port 30026 }}
+      nodePort: {{ add $port 30026 }}
       protocol: UDP      
-    - name: webrtc-{{ add $port 30536 }}
-      port: {{ add $port 30536 }}
-      targetPort: {{ add $port 30536 }}
-      nodePort: {{ add $port 30536 }}
+    - name: webrtc-{{ add $port 30056 }}
+      port: {{ add $port 30056 }}
+      targetPort: {{ add $port 30056 }}
+      nodePort: {{ add $port 30056 }}
       protocol: UDP      
     {{- end }}
   selector:
