@@ -120,22 +120,29 @@ nodeSelector: {}
 # node-role.kubernetes.io/center-node
 # 边缘节点添加不可调度污点，fcu上添加该污点容忍
 # node-role.kubernetes.io/edge-node
-# tolerations: 
-#   - key: "node-role.tx.com"  
-#     operator: "Equal"  
-#     value: "edge-node"  
-#     effect: "NoSchedule"  
+tolerations: 
+  - key: "tiexiang.io/edge-node"  
+    operator: "Equal"  
+    effect: "NoSchedule"  
 
 # 根据fcu所属的车站，将fcu调度到车站所属的节点上
-# affinity:
-#   nodeAffinity:  
-#     requiredDuringSchedulingIgnoredDuringExecution:  
-#       nodeSelectorTerms:  
-#         - matchExpressions:  
-#             - key: "node-role.tx.com"  
+affinity:
+  nodeAffinity:  
+    requiredDuringSchedulingIgnoredDuringExecution:  
+      nodeSelectorTerms:  
+        - matchExpressions:  
+            - key: "tiexiang.io/edge-node"  
+              operator: In  
+              values:  
+                - "true"        
+#             - key: "tiexiang.io/station-code"  
 #               operator: In  
 #               values:  
-#                 - "xxx-xxx"
+#                 - "nanningju"
+#             - key: "tiexiang.io/company-code"  
+#               operator: In  
+#               values:  
+#                 - "tiexiang"                
 
 persistentVolumeClaim:
   data: 
