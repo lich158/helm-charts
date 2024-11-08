@@ -126,6 +126,7 @@ nodeSelector: {}
 #     value: "edge-node"  
 #     effect: "NoSchedule"  
 
+# 根据fcu所属的车站，将fcu调度到车站所属的节点上
 # affinity:
 #   nodeAffinity:  
 #     requiredDuringSchedulingIgnoredDuringExecution:  
@@ -134,7 +135,7 @@ nodeSelector: {}
 #             - key: "node-role.tx.com"  
 #               operator: In  
 #               values:  
-#                 - "edge-node"
+#                 - "xxx-xxx"
 
 persistentVolumeClaim:
   data: 
