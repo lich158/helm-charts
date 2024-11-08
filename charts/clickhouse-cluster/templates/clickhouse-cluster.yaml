@@ -30,13 +30,16 @@ spec:
       - name: pod-template-resource-limit
         spec:
           containers:
+          - name: clickhouse
+            image: docker.io/clickhouse/clickhouse-server:latest 
+            imagePullPolicy: IfNotPresent
             resources:
-                requests:
-                  memory: {{ .Values.podtemplate.requestsmem }}
-                  cpu: {{ .Values.podtemplate.requestscpu }}
-                limits:
-                  memory: {{ .Values.podtemplate.limitsmem }}
-                  cpu:  {{ .Values.podtemplate.limitscpu }}
+              requests:
+                memory: {{ .Values.podtemplate.requestsmem |quote }}
+                cpu: {{ .Values.podtemplate.requestscpu | quote }}
+              limits:
+                memory: {{ .Values.podtemplate.limitsmem | quote }}
+                cpu:  {{ .Values.podtemplate.limitscpu | quote }}
         podDistribution:
           - type: ShardAntiAffinity
             topologyKey: "tiexiang.io/host-name"
