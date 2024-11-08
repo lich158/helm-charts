@@ -39,10 +39,12 @@ spec:
                   cpu:  {{ .Values.podtemplate.limitscpu }}
     podDistribution:
       - type: ShardAntiAffinity
+        topologyKey: "tiexiang.io/host-name"
       - type: ReplicaAntiAffinity
+        topologyKey: "tiexiang.io/host-name"
       - type: MaxNumberPerNode
         number: {{ .Values.podDistribution.number }}
-        topologyKey: "kubernetes.io/hostname"
+        topologyKey: "tiexiang.io/host-name"
     serviceTemplates:
     - name: service-template
       generateName: "service-{chi}"
