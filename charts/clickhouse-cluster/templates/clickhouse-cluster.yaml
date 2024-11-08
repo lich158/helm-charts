@@ -58,7 +58,6 @@ spec:
       spec:
         accessModes:
         - ReadWriteOnce
-        storageClassName: {{ .Values.volumeClaimTemplates.storageclassname }}
         resources:
           requests:
             storage: {{ .Values.volumeClaimTemplates.storage }}

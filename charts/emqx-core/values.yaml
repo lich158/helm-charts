@@ -16,6 +16,5 @@ service:
   type: NodePort
   
 volumeClaimTemplates:
-  storageClassName: nfs-client
   storage: 1Gi
   accessModes: ReadWriteOnce

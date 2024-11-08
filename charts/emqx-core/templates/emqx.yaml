@@ -8,7 +8,6 @@ spec:
   coreTemplate:
     spec:
       volumeClaimTemplates:
-        storageClassName: {{ .Values.volumeClaimTemplates.storageClassName }}
         resources:
           requests:
             storage: {{ .Values.volumeClaimTemplates.storage }}
