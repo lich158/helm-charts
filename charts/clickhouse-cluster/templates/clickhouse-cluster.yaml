@@ -26,7 +26,7 @@ spec:
           shardsCount: {{ .Values.clusters.shardsCount }}
           replicasCount: {{ .Values.clusters.replicasCount }}
   templates:
-    podTemplate:
+    podTemplates:
       - name: pod-template-resource-limit
         spec:
           containers:
@@ -37,14 +37,14 @@ spec:
                 limits:
                   memory: {{ .Values.podtemplate.limitsmem }}
                   cpu:  {{ .Values.podtemplate.limitscpu }}
-    podDistribution:
-      - type: ShardAntiAffinity
-        topologyKey: "tiexiang.io/host-name"
-      - type: ReplicaAntiAffinity
-        topologyKey: "tiexiang.io/host-name"
-      - type: MaxNumberPerNode
-        number: {{ .Values.podDistribution.number }}
-        topologyKey: "tiexiang.io/host-name"
+        podDistribution:
+          - type: ShardAntiAffinity
+            topologyKey: "tiexiang.io/host-name"
+          - type: ReplicaAntiAffinity
+            topologyKey: "tiexiang.io/host-name"
+          - type: MaxNumberPerNode
+            number: {{ .Values.podDistribution.number }}
+            topologyKey: "tiexiang.io/host-name"
     serviceTemplates:
     - name: service-template
       generateName: "service-{chi}"
