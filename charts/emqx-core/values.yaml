@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 
-  core: 2
-  replicant: 3
+  core: 4
+  replicant: 0
 
 image:
   repository: emqx
@@ -16,5 +16,18 @@ service:
   type: NodePort
   
 volumeClaimTemplates:
-  storage: 1Gi
+  storage: 10Gi
   accessModes: ReadWriteOnce
+
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchLabels:
+            apps.emqx.io/db-role: core
+            apps.emqx.io/instance: emqx-cluster
+            apps.emqx.io/managed-by: emqx-operator
+        topologyKey: tiexiang.io/host-name
