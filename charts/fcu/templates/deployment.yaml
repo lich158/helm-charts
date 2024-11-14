@@ -110,11 +110,27 @@ spec:
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- /* {{- if hasKey .Values.resources.limits "gpu" }} */ -}}
+      {{- if .Values.resources.limits.gpu }}
       {{- with .Values.affinity }}
       affinity:
-        {{- toYaml . | nindent 8 }}
+        nodeAffinity:  
+          requiredDuringSchedulingIgnoredDuringExecution:  
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "tiexiang.io/edge-node"  
+                    operator: In
+                    values:
+                      - "true"
+                  - key: "tiexiang.io/station-code"  
+                    operator: In  
+                    values:  
+                      - {{ . | quote }}
       {{- end }}
+      {{- end }}
+      {{- if .Values.resources.limits.gpu }}
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- end }}

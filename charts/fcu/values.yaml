@@ -126,19 +126,19 @@ tolerations:
     effect: "NoSchedule"  
 
 # 根据fcu所属的车站，将fcu调度到车站所属的节点上
-affinity:
-  nodeAffinity:  
-    requiredDuringSchedulingIgnoredDuringExecution:  
-      nodeSelectorTerms:  
-        - matchExpressions:  
-            - key: "tiexiang.io/edge-node"  
-              operator: In  
-              values:  
-                - "true"        
-#             - key: "tiexiang.io/station-code"  
-#               operator: In  
-#               values:  
-#                 - "nanningju"
+affinity: nanningju
+  # nodeAffinity:  
+  #   requiredDuringSchedulingIgnoredDuringExecution:  
+  #     nodeSelectorTerms:  
+  #       - matchExpressions:  
+  #           - key: "tiexiang.io/edge-node"  
+  #             operator: In  
+  #             values:  
+  #               - "true"        
+  #           - key: "tiexiang.io/station-code"  
+  #             operator: In  
+  #             values:  
+  #               - "nanningju"
 #             - key: "tiexiang.io/company-code"  
 #               operator: In  
 #               values:  
