@@ -142,7 +142,7 @@ affinity: nanningju
 #             - key: "tiexiang.io/company-code"  
 #               operator: In  
 #               values:  
-#                 - "tiexiang"                
+#                 - "tiexiang"
 
 persistentVolumeClaim:
   data: 
