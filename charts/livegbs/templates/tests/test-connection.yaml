@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "livegbs.fullname" . }}:{{ .Values.livecms.service.port }}']
+      args: ['{{ include "livegbs.fullname" . }}:{{ .Values.service.port }}']
   restartPolicy: Never

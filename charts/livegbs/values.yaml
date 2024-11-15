@@ -76,75 +76,30 @@ resources:
     memory: 512Mi
 
 service:
-  type: ClusterIP
-  port: 10000
+  type: NodePort
+  names:
+  - name: livegbs-tcp
+    port: 10000
+    nodeport: 32767
+    protocol: TCP
+  - name: livegbs-udp
+    port: 10000
+    nodeport: 32767
+    protocol: UDP
 
-livecms:
-  service:
-    type: NodePort
-    ports:
-      - name: http
-        port: 30020
-        protocol: TCP
-      - name: http-udp
-        port: 30020
-        protocol: UDP
-      - name: sip
-        port: 30021
-        protocol: TCP
-      - name: sip-udp
-        port: 30021
-        protocol: UDP
-      - name: redis
-        port: 30022
-        protocol: TCP
-  configmap:
-    http:
-      port: 30020
-    redis:
-      port: 30022
-    sip:
-      port: 30021          
-  readinessProbe:
+livecms:     
+  livenessProbe:
     httpGet:
       path: /api/v1/getserverinfo
-      port: 30020
-      initialDelaySeconds: 5
-      periodSeconds: 5
+      port: 10000
+    initialDelaySeconds: 5
+    periodSeconds: 5
 livesms:
-  service:
-    type: NodePort
-    length: 30     
-    ports:
-      - name: http
-        port: 30023
-        protocol: TCP
-      - name: http-udp
-        port: 30023
-        protocol: UDP
-      - name: rtmp
-        port: 30024
-        protocol: TCP
-      - name: rtmp-udp
-        port: 30024
-        protocol: UDP
-      - name: sip
-        port: 30025
-        protocol: TCP
-  configmap:
-    http:
-      port: 30023
-    redis:
-      port: 30022
-    sip:
-      port: 30025
-    rtp:
-      tcp_port_range: 30026,30056
-      udp_port_range: 30026,30056
-    webrtc:
-      udp_port_range: 30056,30086
-    record:
-      dir: "/app/liveSMS/record"
+  livenessProbe:
+    tcpSocket:
+      port: 10001
+    initialDelaySeconds: 5
+    periodSeconds: 5   
 
 someInteger1: 30     
 

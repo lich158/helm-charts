@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "livegbs.fullname" . }}
+  labels:
+    {{- include "livegbs.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "livegbs.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "livegbs.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        # livesms
+        - name: {{ .Values.image.livesms.name }}
+          securityContext:
+            privileged: true   
+          env:
+          - name: LIVESMS_HOST_IP
+            value: {{ .Values.livegbs.ip |quote }}
+          - name: LIVECMS_HOST_IP
+            value: {{ .Values.livegbs.ip |quote }}
+          - name: RECORD_DIR
+            value: {{ .Values.livegbs.env.RECORD_DIR |quote }}        
+          image: {{ .Values.image.livesms.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}                           
+          livenessProbe:
+            {{- toYaml .Values.livesms.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.livesms.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+        # livecms
+        - name: {{ .Values.image.livecms.name }}
+          securityContext:
+            privileged: true
+          env:
+          - name: LIVESMS_HOST_IP
+            value: {{ .Values.livegbs.ip |quote }}
+          - name: LIVECMS_HOST_IP
+            value: {{ .Values.livegbs.ip |quote }}
+          - name: RECORD_DIR
+            value: {{ .Values.livegbs.env.RECORD_DIR |quote }}
+          image: {{ .Values.image.livecms.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            {{- range .Values.service.names }}
+            - name: {{ .name }}
+              containerPort: {{ .port }}
+              protocol: {{ .protocol }}
+            {{- end }}           
+          livenessProbe:
+            {{- toYaml .Values.livecms.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.livecms.readinessProbe | nindent 12 }}          
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}                        
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
