@@ -12,9 +12,10 @@ data:
         "Device": {
             "DeviceClass": {{ $data.Device.DeviceClass | quote}},
             "FCUNum": {{ $data.Device.FCUNum | quote}},
-            "LineCode": {{ $data.Device.LineCode | quote}},
             "Manufacturer": {{ $data.Device.Manufacturer | quote}},
+            {{- if $data.Device.ScopeClass }}
             "ScopeClass": {{ $data.Device.ScopeClass | quote}}
+            {{- end }}
         },
         "Level2Seconds": {
             "0": {{ index $data.Level2Seconds "0" }},
@@ -23,7 +24,7 @@ data:
             "3": {{ index $data.Level2Seconds "3" }},
             "4": {{ index $data.Level2Seconds "4" }},
             "5": {{ index $data.Level2Seconds "5" }},
-            "6": {{ index $data.Level2Seconds "6" }}            
+            "6": {{ index $data.Level2Seconds "6" }}
         },
         "Logger": {
             "Level": "INFO",
