@@ -126,7 +126,7 @@ tolerations:
     effect: "NoSchedule"  
 
 # 根据fcu所属的车站，将fcu调度到车站所属的节点上
-affinity: nanningju
+# affinity: 
   # nodeAffinity:  
   #   requiredDuringSchedulingIgnoredDuringExecution:  
   #     nodeSelectorTerms:  
