@@ -1,0 +1,92 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "emqx-operator.fullname" . }}-serving-cert
+  name: {{ include "emqx-operator.fullname" . }}-validating-webhook-configuration
+webhooks:
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    service:
+      name: {{ include "emqx-operator.fullname" . }}-webhook-service
+      namespace: {{ .Release.Namespace }}
+      path: /validate-apps-emqx-io-v2beta1-rebalance
+  failurePolicy: Fail
+  name: validator.rebalance.emqx.io
+  rules:
+  - apiGroups:
+    - apps.emqx.io
+    apiVersions:
+    - v2beta1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - rebalances
+  sideEffects: None
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    service:
+      name: {{ include "emqx-operator.fullname" . }}-webhook-service
+      namespace: {{ .Release.Namespace }}
+      path: /validate-apps-emqx-io-v1beta4-emqxbroker
+  failurePolicy: Fail
+  name: validator.broker.emqx.io
+  rules:
+  - apiGroups:
+    - apps.emqx.io
+    apiVersions:
+    - v1beta4
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - emqxbrokers
+  sideEffects: None
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    service:
+      name: {{ include "emqx-operator.fullname" . }}-webhook-service
+      namespace: {{ .Release.Namespace }}
+      path: /validate-apps-emqx-io-v1beta4-emqxenterprise
+  failurePolicy: Fail
+  name: validator.enterprise.emqx.io
+  rules:
+  - apiGroups:
+    - apps.emqx.io
+    apiVersions:
+    - v1beta4
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - emqxenterprises
+  sideEffects: None
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    service:
+      name: {{ include "emqx-operator.fullname" . }}-webhook-service
+      namespace: {{ .Release.Namespace }}
+      path: /validate-apps-emqx-io-v1beta4-emqxplugin
+  failurePolicy: Fail
+  name: validator.emqxplugin.emqx.io
+  rules:
+  - apiGroups:
+    - apps.emqx.io
+    apiVersions:
+    - v1beta4
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - emqxplugins
+  sideEffects: None

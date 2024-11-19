@@ -1,0 +1,9 @@
+apiVersion: v2
+appVersion: 2.2.25
+description: A Helm chart for EMQX Operator Controller
+name: emqx-operator
+sources:
+- https://github.com/emqx/emqx-operator/tree/main/deploy/charts/emqx-operator
+- https://github.com/emqx/emqx
+type: application
+version: 2.2.25

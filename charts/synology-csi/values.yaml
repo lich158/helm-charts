@@ -1,0 +1,149 @@
+---
+# The client info secret defines how the K8s nodes can connect to the Synology Diskstation Manager (DSM).
+clientInfoSecret:
+  # How to connect to the Synology Diskstation?
+  clients:
+    - host: 192.168.1.1    # the IP address of the Diskstation
+      https: false         # whether the port expects HTTPS or not
+      password: <password> # the password of the CSI user
+      port: 5000           # the port for connecting to the Diskstation Manager application
+      username: <username> # the name of the CSI user
+    - host: 192.168.1.1
+      https: true
+      password: <password>
+      port: 5001
+      username: <username>
+  # Whether to create the secret if the chart gets installed or not; ignored on updates.
+  create: false
+  # Defaults to {{ include "synology-csi.fullname" $ }}-client-info if empty or not present:
+  name: ""
+# Specifies affinity, nodeSelector and tolerations for the controller StatefulSet
+controller:
+  affinity: { }
+  nodeSelector: { }
+  tolerations: [ ]
+fullnameOverride: ""
+images:
+  # https://kubernetes-csi.github.io/docs/external-attacher.htmlis
+  attacher:
+    image: registry.k8s.io/sig-storage/csi-attacher
+    pullPolicy: IfNotPresent
+    tag: v4.4.0
+  # https://kubernetes-csi.github.io/docs/node-driver-registrar.html
+  nodeDriverRegistrar:
+    image: registry.k8s.io/sig-storage/csi-node-driver-registrar
+    pullPolicy: IfNotPresent
+    tag: v2.9.0
+  plugin:
+    image: synology/synology-csi
+    pullPolicy: IfNotPresent
+    # Defaults to {{ $.Chart.AppVersion }} if empty or not present:
+    tag: ""
+  # https://kubernetes-csi.github.io/docs/external-provisioner.html
+  provisioner:
+    image: registry.k8s.io/sig-storage/csi-provisioner
+    pullPolicy: IfNotPresent
+    tag: v3.6.0
+  # https://kubernetes-csi.github.io/docs/external-resizer.html
+  resizer:
+    image: registry.k8s.io/sig-storage/csi-resizer
+    pullPolicy: IfNotPresent
+    tag: v1.9.0
+  # https://kubernetes-csi.github.io/docs/external-snapshotter.html
+  snapshotter:
+    image: registry.k8s.io/sig-storage/csi-snapshotter
+    pullPolicy: IfNotPresent
+    tag: v6.3.0
+installCSIDriver: true
+nameOverride: ""
+# Specifies affinity, nodeSelector and tolerations for the node DaemonSet
+node:
+  affinity: { }
+  # If your kubelet path is not standard, specify it here :
+  # example for miocrok8s distrib : /var/snap/microk8s/common/var/lib/kubelet
+  kubeletPath: /var/lib/kubelet
+  nodeSelector: { }
+  tolerations: [ ]
+# This secret holds the credentials for the SMB user - this is not used for iSCSI volumes:
+smbUserSecret:
+  stringData:
+    password: <password> # the password of the SMB user
+    username: <username> # the name of the SMB user
+  # Whether to create the secret if the chart gets installed or not; ignored on updates.
+  create: false
+  # Defaults to {{ include "synology-csi.fullname" $ }}-smb-user if empty or not present:
+  name: ""
+# Specifies affinity, nodeSelector and tolerations for the snapshotter StatefulSet
+snapshotter:
+  affinity: { }
+  nodeSelector: { }
+  tolerations: [ ]
+storageClasses:
+  iscsi-delete:
+    ## Optional: `true` or `false` (default):
+    #disabled: false
+    ## Optional: `true` or `false` (default):
+    #isDefault: false
+    ## If not present, some location will be chosen to create volumes with the filesystem type ext4.
+    ## Note that these parameters cannot get updated once deployed - any subsequent changes get ignored!
+    #parameters:
+    #  dsm: 192.168.1.1            # optional: needs to be present in the client-info secret
+    #  formatOptions: --no-discard # optional (iSCSI only): mkfs.* options
+    #  fsType: ext4                # optional (iSCSI only): `btrfs` or `ext4` (default)
+    #  location: /volume1          # optional, defaults to your primary volume
+    #  mountPermissions: '0750'    # optional: (NFS only) mounted folder permissions
+    #  protocol: iscsi             # optional: 'nfs', `smb` or `iscsi` (default)
+    ## Optional: `Retain` or `Delete` (default):
+    reclaimPolicy: Delete
+    # Do you want this storage class to be included in the Helm test?
+    test: true
+    ## Optional: `WaitForFirstConsumer` or `Immediate` (default):
+    #volumeBindingMode: Immediate
+  iscsi-retain:
+    reclaimPolicy: Retain
+  nfs-delete:
+    mountOptions:
+      - vers=4.1
+    parameters:
+      protocol: nfs
+    reclaimPolicy: Delete
+    test: true
+  nfs-retain:
+    mountOptions:
+      - vers=4.1
+    parameters:
+      protocol: nfs
+    reclaimPolicy: Retain
+  smb-delete:
+    mountOptions:
+      - mfsymlinks
+    parameters:
+      protocol: smb
+    reclaimPolicy: Delete
+    test: true
+  smb-retain:
+    mountOptions:
+      - mfsymlinks
+    parameters:
+      protocol: smb
+    reclaimPolicy: Retain
+test:
+  affinity: { }
+  nodeSelector: { }
+  tolerations: [ ]
+volumeSnapshotClasses:
+  delete:
+    ## One of true or false (default):
+    #disabled: false
+    # One of "Retain" or "Delete" (default):
+    deletionPolicy: Delete
+    disabled: false
+    ## One of true or false (default):
+    #isDefault: false
+    ## Note that these parameters cannot get updated once deployed - any subsequent changes get ignored!
+    #parameters:
+    #  description: Kubernetes CSI
+    #  is_locked: "false"
+  retain:
+    deletionPolicy: Retain
+    disabled: false

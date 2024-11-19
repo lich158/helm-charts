@@ -1,0 +1,31 @@
+{{- range $name, $_ := $.Values.storageClasses }}
+{{- if not .disabled }}
+---
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    storageclass.kubernetes.io/is-default-class: {{ default "false" .isDefault | quote }}
+  labels: {{- include "synology-csi.labels" $ | nindent 4 }}
+  name: {{ printf "%s-%s" (include "synology-csi.fullname" $) $name }}
+{{- with .mountOptions }}
+mountOptions: {{- toYaml . | nindent 2 }}
+{{- end }}
+{{- with .parameters }}
+parameters:
+{{- if eq .protocol "smb" }}
+  csi.storage.k8s.io/node-stage-secret-name: {{ $.Values.smbUserSecret.name | default (include "synology-csi.fullname" $ | printf "%s-smb-user") }}
+  csi.storage.k8s.io/node-stage-secret-namespace: {{ $.Release.Namespace }}
+{{- end }}
+{{- toYaml . | nindent 2 }}
+{{- end }}
+provisioner: csi.san.synology.com
+{{- with .reclaimPolicy }}
+reclaimPolicy: {{ . }}
+{{- end }}
+{{- with .volumeBindingMode }}
+volumeBindingMode: {{ . }}
+{{- end }}
+{{- end }}
+{{- end }}
