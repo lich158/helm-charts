@@ -43,6 +43,37 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/bcsu-0.1.0/bcsu-0.1.0.tgz
     version: 0.1.0
+  cert-manager:
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/signKey: |
+        fingerprint: 1020CF3C033D4F35BAE1C19E1226061C665DF13E
+        url: https://cert-manager.io/public-keys/cert-manager-keyring-2021-09-20-1020CF3C033D4F35BAE1C19E1226061C665DF13E.gpg
+    apiVersion: v2
+    appVersion: v1.16.1
+    created: "2024-11-19T06:02:14.129705013Z"
+    description: A Helm chart for cert-manager
+    digest: c02d274673e660748381e7a76a6f79a8850b71bf5a638cd516b28d8d298eaa81
+    home: https://cert-manager.io
+    icon: https://raw.githubusercontent.com/cert-manager/community/4d35a69437d21b76322157e6284be4cd64e6d2b7/logo/logo-small.png
+    keywords:
+    - cert-manager
+    - kube-lego
+    - letsencrypt
+    - tls
+    kubeVersion: '>= 1.22.0-0'
+    maintainers:
+    - email: cert-manager-maintainers@googlegroups.com
+      name: cert-manager-maintainers
+      url: https://cert-manager.io
+    name: cert-manager
+    sources:
+    - https://github.com/cert-manager/cert-manager
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/cert-manager-v1.16.1/cert-manager-v1.16.1.tgz
+    version: v1.16.1
   clickhouse-cluster:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -236,6 +267,20 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/emqx-core-0.1.0/emqx-core-0.1.0.tgz
     version: 0.1.0
+  emqx-operator:
+  - apiVersion: v2
+    appVersion: 2.2.25
+    created: "2024-11-19T06:02:14.270322966Z"
+    description: A Helm chart for EMQX Operator Controller
+    digest: 4bb01a0c99882085c23b05bf57a9dc0b0cd62022fc0f94171a1b48bd7fe3f248
+    name: emqx-operator
+    sources:
+    - https://github.com/emqx/emqx-operator/tree/main/deploy/charts/emqx-operator
+    - https://github.com/emqx/emqx
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/emqx-operator-2.2.25/emqx-operator-2.2.25.tgz
+    version: 2.2.25
   fcu:
   - apiVersion: v2
     appVersion: 0.0.0
@@ -347,6 +392,63 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/fcu-0.1.0/fcu-0.1.0.tgz
     version: 0.1.0
+  gpu-operator:
+  - apiVersion: v2
+    appVersion: v24.9.0
+    created: "2024-11-19T06:02:14.402658023Z"
+    dependencies:
+    - condition: nfd.enabled
+      name: node-feature-discovery
+      repository: file://charts/node-feature-discovery
+      version: v0.16.6
+    description: NVIDIA GPU Operator creates/configures/manages GPUs atop Kubernetes
+    digest: d23e0beeb8a4c84da35144275401934c8c894a26bba7c4c96dcde1fecab8eafe
+    home: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/overview.html
+    icon: https://assets.nvidiagrid.net/ngc/logos/GPUoperator.png
+    keywords:
+    - gpu
+    - cuda
+    - compute
+    - operator
+    - deep learning
+    - monitoring
+    - tesla
+    kubeVersion: '>= 1.16.0-0'
+    name: gpu-operator
+    sources:
+    - https://github.com/NVIDIA/gpu-operator
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/gpu-operator-v24.9.0/gpu-operator-v24.9.0.tgz
+    version: v24.9.0
+  harbor:
+  - apiVersion: v1
+    appVersion: 2.11.1
+    created: "2024-11-19T06:02:14.552614601Z"
+    description: An open source trusted cloud native registry that stores, signs,
+      and scans content
+    digest: c03272486a4efb4826eef82973e043143e3351ea3b26e318cd644aff215d7d66
+    home: https://goharbor.io
+    icon: https://raw.githubusercontent.com/goharbor/website/main/static/img/logos/harbor-icon-color.png
+    keywords:
+    - docker
+    - registry
+    - harbor
+    maintainers:
+    - email: yan-yw.wang@broadcom.com
+      name: Yan Wang
+    - email: wenkai.yin@broadcom.com
+      name: Wenkai Yin
+    - email: miner.yang@broadcom.com
+      name: Miner Yang
+    - email: shengwen.yu@broadcom.com
+      name: Shengwen Yu
+    name: harbor
+    sources:
+    - https://github.com/goharbor/harbor
+    - https://github.com/goharbor/harbor-helm
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/harbor-1.15.1/harbor-1.15.1.tgz
+    version: 1.15.1
   livegbs:
   - apiVersion: v2
     appVersion: v3.4.9
@@ -418,6 +520,31 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/livegbs-0.1.0/livegbs-0.1.0.tgz
     version: 0.1.0
+  mysql-innodbcluster:
+  - apiVersion: v2
+    appVersion: 8.0.40
+    created: "2024-11-19T06:02:14.654000971Z"
+    description: MySQL InnoDB Cluster Helm Chart for deploying MySQL InnoDB Cluster
+      in Kubernetes
+    digest: 313d702bbbb650e1e3c058f5fa219d2b2feb3928101464d50cf6db6e515c3ba0
+    icon: https://www.mysql.com/common/logos/logo-mysql-170x115.png
+    name: mysql-innodbcluster
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/mysql-innodbcluster-2.0.16/mysql-innodbcluster-2.0.16.tgz
+    version: 2.0.16
+  mysql-operator:
+  - apiVersion: v2
+    appVersion: 8.4.3-2.1.5
+    created: "2024-11-19T06:02:14.956918816Z"
+    description: MySQL Operator Helm Chart for deploying MySQL InnoDB Cluster in Kubernetes
+    digest: d48032f25f792cb900a639fb89a652226889539d927101acfddd63e3ddd40efd
+    icon: https://www.mysql.com/common/logos/logo-mysql-170x115.png
+    name: mysql-operator
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/mysql-operator-2.1.5/mysql-operator-2.1.5.tgz
+    version: 2.1.5
   nacos:
   - apiVersion: v1
     appVersion: "1.0"
@@ -443,4 +570,167 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/nacos-0.1.5/nacos-0.1.5.tgz
     version: 0.1.5
-generated: "2024-11-16T08:31:51.77236595Z"
+  nfs-subdir-external-provisioner:
+  - apiVersion: v1
+    appVersion: 4.0.2
+    created: "2024-11-19T06:02:15.11817456Z"
+    description: nfs-subdir-external-provisioner is an automatic provisioner that
+      used your *already configured* NFS server, automatically creating Persistent
+      Volumes.
+    digest: 7da46b2892ad61356677392ef756ec0b9ab26cde33dfc549c24530fcf3492038
+    home: https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
+    keywords:
+    - nfs
+    - storage
+    - provisioner
+    kubeVersion: '>=1.9.0-0'
+    name: nfs-subdir-external-provisioner
+    sources:
+    - https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/nfs-subdir-external-provisioner-4.0.18/nfs-subdir-external-provisioner-4.0.18.tgz
+    version: 4.0.18
+  operator:
+  - apiVersion: v2
+    appVersion: v6.0.4
+    created: "2024-11-19T06:02:15.269691076Z"
+    description: A Helm chart for MinIO Operator
+    digest: 69321b8c717c4a8e9c0c355f998b3b02aba0f42fa1f83ece4dc55337a398807c
+    home: https://min.io
+    icon: https://min.io/resources/img/logo/MINIO_wordmark.png
+    keywords:
+    - storage
+    - object-storage
+    - S3
+    maintainers:
+    - email: dev@minio.io
+      name: MinIO, Inc
+    name: operator
+    sources:
+    - https://github.com/minio/operator
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/operator-6.0.4/operator-6.0.4.tgz
+    version: 6.0.4
+  redis-cluster:
+  - apiVersion: v2
+    appVersion: 0.16.1
+    created: "2024-11-19T06:02:15.409882284Z"
+    description: Provides easy redis setup definitions for Kubernetes services, and
+      deployment.
+    digest: 739798bfccc332f59689e7ca3106676e11afffd0b916b6f0d7a56f2ca811bf42
+    home: https://github.com/ot-container-kit/redis-operator
+    icon: https://github.com/OT-CONTAINER-KIT/redis-operator/raw/master/static/redis-operator-logo.svg
+    keywords:
+    - operator
+    - redis
+    - opstree
+    - kubernetes
+    - openshift
+    - redis-exporter
+    maintainers:
+    - name: iamabhishek-dubey
+    - name: sandy724
+    - name: shubham-cmyk
+    name: redis-cluster
+    sources:
+    - https://github.com/ot-container-kit/redis-operator
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/redis-cluster-0.16.1/redis-cluster-0.16.1.tgz
+    version: 0.16.1
+  redis-operator:
+  - apiVersion: v2
+    appVersion: 0.18.0
+    created: "2024-11-19T06:02:15.546265995Z"
+    dependencies:
+    - alias: certmanager
+      condition: certmanager.enabled
+      name: cert-manager
+      repository: file://charts/cert-manager
+      version: v1.12.4
+    description: Provides easy redis setup definitions for Kubernetes services, and
+      deployment.
+    digest: a512c6e4f45f0da673f116341129831f59cb365079c792053063a3159fa91308
+    home: https://github.com/OT-CONTAINER-KIT/redis-operator
+    icon: https://github.com/OT-CONTAINER-KIT/redis-operator/raw/master/static/redis-operator-logo.svg
+    keywords:
+    - operator
+    - redis
+    - opstree
+    - kubernetes
+    - openshift
+    maintainers:
+    - name: iamabhishek-dubey
+    - name: sandy724
+    - name: shubham-cmyk
+    name: redis-operator
+    sources:
+    - https://github.com/OT-CONTAINER-KIT/redis-operator
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/redis-operator-0.18.3/redis-operator-0.18.3.tgz
+    version: 0.18.3
+  synology-csi:
+  - apiVersion: v2
+    appVersion: v1.2.0
+    created: "2024-11-19T06:02:15.699384023Z"
+    description: A Helm chart for the Synology CSI Driver
+    digest: eb46ed6ff9a411c53686e99776d54fd882d05c09b3ce3c4c37d715daee6fda50
+    home: https://github.com/christian-schlichtherle/synology-csi-chart
+    keywords:
+    - Synology
+    - CSI Driver
+    kubeVersion: '>= 1.20.0'
+    maintainers:
+    - name: Christian Schlichtherle
+      url: https://github.com/christian-schlichtherle
+    name: synology-csi
+    sources:
+    - https://github.com/christian-schlichtherle/synology-csi-chart/tree/main
+    - https://github.com/SynologyOpenSource/synology-csi/tree/main
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/synology-csi-0.10.1/synology-csi-0.10.1.tgz
+    version: 0.10.1
+  tenant:
+  - apiVersion: v2
+    appVersion: v6.0.4
+    created: "2024-11-19T06:02:15.820061669Z"
+    description: A Helm chart for MinIO Operator
+    digest: 3c2b5bf9e6daeb9e3f84f90ee6cd36593baae61c499c05abc635400eb1d04181
+    home: https://min.io
+    icon: https://min.io/resources/img/logo/MINIO_wordmark.png
+    keywords:
+    - storage
+    - object-storage
+    - S3
+    maintainers:
+    - email: dev@minio.io
+      name: MinIO, Inc
+    name: tenant
+    sources:
+    - https://github.com/minio/operator
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/tenant-6.0.4/tenant-6.0.4.tgz
+    version: 6.0.4
+  zookeeper:
+  - apiVersion: v1
+    created: "2024-11-19T06:02:15.934180358Z"
+    description: Centralized service for maintaining configuration information, naming,
+      providing distributed synchronization, and providing group services.
+    digest: 9655ec35646d0e883ed26be084fe8d3da07ad2376f70f543de3c64627995b201
+    home: https://zookeeper.apache.org/
+    icon: https://zookeeper.apache.org/images/zookeeper_small.gif
+    maintainers:
+    - email: lachlan@deis.com
+      name: Lachlan Evenson
+    - email: owensk@google.com
+      name: Kenneth Owens
+    name: zookeeper
+    sources:
+    - https://github.com/apache/zookeeper
+    - https://github.com/kubernetes-zookeeper/kubernetes-zookeeper
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/zookeeper-1.1/zookeeper-1.1.tgz
+    version: "1.1"
+generated: "2024-11-19T06:02:15.934278572Z"
