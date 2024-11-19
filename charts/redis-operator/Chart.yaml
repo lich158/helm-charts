@@ -4,7 +4,7 @@ dependencies:
 - alias: certmanager
   condition: certmanager.enabled
   name: cert-manager
-  repository: https://charts.jetstack.io
+  repository: "file://charts/cert-manager"
   version: v1.12.4
 description: Provides easy redis setup definitions for Kubernetes services, and deployment.
 home: https://github.com/OT-CONTAINER-KIT/redis-operator
