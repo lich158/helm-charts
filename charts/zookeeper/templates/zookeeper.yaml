@@ -86,7 +86,7 @@ spec:
                     operator: In
                     values:
                     - "{{ printf "zk-%s" .Release.Name  | trunc 24 }}"
-              topologyKey: "kubernetes.io/hostname"
+              topologyKey: {{ .Values.topologyKey }}
       {{- else if eq .Values.AntiAffinity "soft"}}
       affinity:
         podAntiAffinity:
@@ -99,7 +99,7 @@ spec:
                         operator: In
                         values:
                          - "{{ printf "zk-%s" .Release.Name  | trunc 24 }}"
-                 topologyKey: "kubernetes.io/hostname"
+                 topologyKey: {{ .Values.topologyKey }}
       {{- end}}
       containers:
       - name: k8szk

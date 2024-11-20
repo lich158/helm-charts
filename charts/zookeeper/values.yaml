@@ -17,6 +17,7 @@ PurgeHours: 1
 ProbeInitialDelaySeconds : 15
 ProbeTimeoutSeconds : 5
 AntiAffinity: "hard"
+topologyKey: "kubernetes.io/hostname"
 LogLevel: "INFO"
 MaxSessionTimeout: 40000
 MinSessionTimeout: 4000

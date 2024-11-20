@@ -12,4 +12,4 @@ name: zookeeper
 sources:
 - https://github.com/apache/zookeeper
 - https://github.com/kubernetes-zookeeper/kubernetes-zookeeper
-version: "1.1"
+version: "1.1.0"
