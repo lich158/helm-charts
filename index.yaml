@@ -520,6 +520,50 @@ entries:
     urls:
     - https://github.com/lich158/helm-charts/releases/download/livegbs-0.1.0/livegbs-0.1.0.tgz
     version: 0.1.0
+  minio-operator:
+  - apiVersion: v2
+    appVersion: v6.0.4
+    created: "2024-11-20T02:21:25.947840462Z"
+    description: A Helm chart for MinIO Operator
+    digest: 4242dabdc7733860a5384a6ec57c4708b635ff8cb99719b82be25b954bb31e73
+    home: https://min.io
+    icon: https://min.io/resources/img/logo/MINIO_wordmark.png
+    keywords:
+    - storage
+    - object-storage
+    - S3
+    maintainers:
+    - email: dev@minio.io
+      name: MinIO, Inc
+    name: minio-operator
+    sources:
+    - https://github.com/minio/operator
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/minio-operator-6.0.4/minio-operator-6.0.4.tgz
+    version: 6.0.4
+  minio-tenant:
+  - apiVersion: v2
+    appVersion: v6.0.4
+    created: "2024-11-20T02:21:26.044384065Z"
+    description: A Helm chart for MinIO Operator
+    digest: 724b8401a87c1aa9cef5cfe618b2a050a73db7f0ff47e911fb0ced5b40c23976
+    home: https://min.io
+    icon: https://min.io/resources/img/logo/MINIO_wordmark.png
+    keywords:
+    - storage
+    - object-storage
+    - S3
+    maintainers:
+    - email: dev@minio.io
+      name: MinIO, Inc
+    name: minio-tenant
+    sources:
+    - https://github.com/minio/operator
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/minio-tenant-6.0.4/minio-tenant-6.0.4.tgz
+    version: 6.0.4
   mysql-innodbcluster:
   - apiVersion: v2
     appVersion: 8.0.40
@@ -733,4 +777,4 @@ entries:
     urls:
     - https://github.com/lich158/tiexiang-base/releases/download/zookeeper-1.1/zookeeper-1.1.tgz
     version: "1.1"
-generated: "2024-11-19T06:02:15.934278572Z"
+generated: "2024-11-20T02:21:26.045579951Z"
