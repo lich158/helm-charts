@@ -10,7 +10,7 @@ keywords:
 maintainers:
 - email: dev@minio.io
   name: MinIO, Inc
-name: tenant
+name: minio-tenant
 sources:
 - https://github.com/minio/operator
 type: application
