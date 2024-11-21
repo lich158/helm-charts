@@ -363,6 +363,18 @@ entries:
     version: 6.0.4
   mysql-innodbcluster:
   - apiVersion: v2
+    appVersion: 8.4.3
+    created: "2024-11-21T02:04:58.341679438Z"
+    description: MySQL InnoDB Cluster Helm Chart for deploying MySQL InnoDB Cluster
+      in Kubernetes
+    digest: 3d5d8f6992e9dc5bbd78f8d592426c256b751351ba79d1715a260fa8ab7b9bb8
+    icon: https://www.mysql.com/common/logos/logo-mysql-170x115.png
+    name: mysql-innodbcluster
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/mysql-innodbcluster-2.1.5/mysql-innodbcluster-2.1.5.tgz
+    version: 2.1.5
+  - apiVersion: v2
     appVersion: 8.0.40
     created: "2024-11-19T06:02:14.654000971Z"
     description: MySQL InnoDB Cluster Helm Chart for deploying MySQL InnoDB Cluster
@@ -530,4 +542,4 @@ entries:
     urls:
     - https://github.com/lich158/tiexiang-base/releases/download/zookeeper-1.1/zookeeper-1.1.tgz
     version: "1.1"
-generated: "2024-11-20T02:21:26.045579951Z"
+generated: "2024-11-21T02:04:58.341724663Z"
