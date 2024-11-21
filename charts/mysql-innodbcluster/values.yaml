@@ -29,6 +29,60 @@ baseServerId: 1000
 #  podAnnotations:
 #  podLabels:
 
+#logs:
+#  error:
+#    enabled: true
+#    collect: false
+#  general:
+#    enabled: false
+#    collect: false
+#  slowQuery:
+#    enabled: false
+#    longQueryTime: 2.5
+#  collector:
+#    image: "192.168.20.198:5000/fluentd-es:v1.16"
+#    fluentd:
+#      forwarding:
+#        enabled: false
+#        forwarderSpec:
+#          podSpec:
+#            terminationGracePeriod: 42
+#          podAnnotations:
+#            forwarderAnnotation1: forwarderAnnotation1Value
+#          podLabels:
+#            forwarderLabel1: forwarderLabel1Value
+#      generalLog:
+#        tag: "genLogTag"
+##        options:
+#      errorLog:
+#        tag: "errLogTag"
+##        options:
+##      slowLog:
+#        tag: "slowLogTag"
+##        options:
+#     recordAugmentation:
+#        enabled: false
+#        labels:
+#        - fieldName: "pod_name"
+#          labelName: "statefulset.kubernetes.io/pod-name"
+#        annotations:
+#        - fieldName: "membership-info"
+#          labelName: "mysql.oracle.com/membership-info"
+#        staticFields:
+#        - fieldName: "static_field_1"
+#          fieldValue: "static_field_1_value"
+#        resourceFields:
+#        - fieldName: "pod_ip"
+#          fieldPath: "status.podIP"
+#        - fieldName: "host_ip"
+#          fieldPath: "status.hostIP"
+#      additionalFilterConfiguration: |
+#        filterConfigValueLine1
+#        filterConfigValueLine1
+#      sink:
+##       rawConfig:
+
+
 #keyring:
 #  file:
 #    fileName:
@@ -53,8 +107,7 @@ baseServerId: 1000
 #      management: "<identifier>-management.kms.<region>.oraclecloud.com"
 #      vaults: "vaults.<region>.oci.oraclecloud.com"
 #      secrets: "secrets.vaults.<region>.oci.oraclecloud.com"
-      
-    
+
 
 #podSpec:
 #  containers:
@@ -149,11 +202,13 @@ baseServerId: 1000
 #backupSchedules:
 #- name: schedule-ref
 #  schedule: "*/1 * * * *"
+#  timeZone: "Europe/Amsterdam"
 #  deleteBackupData: false
 #  backupProfileName: dump-instance-profile-oci
 #  enabled: true
 #- name: schedule-inline
 #  schedule: "*/1 * * * *"
+#  timeZone: "Europe/Amsterdam"
 #  deleteBackupData: false
 #  enabled: true
 #  backupProfile:
@@ -171,3 +226,6 @@ baseServerId: 1000
 # to turn disableLookups on as during `helm template` Helm won't contact the kube API
 # and all lookups will thus fail
 disableLookups: false
+
+# Set explicit FQDN for MySQL instances
+# serviceFqdnTemplate: "{service}.{namespace}.svc.{domain}"
