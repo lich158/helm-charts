@@ -18,3 +18,4 @@
 # redis-operator version v0.18.3
 # synology-csi version v0.10.1
 # zookeeper version v1.1
+# openelb version v0.6.0
