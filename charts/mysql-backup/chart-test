@@ -1,0 +1,14 @@
+export BACKUP_USER=root
+export DBACKUP_PASSWORD=sakila
+export BACKUP_HOST=192.168.3.103
+export BACKUP_PORT=33060
+export BACKUP_DIR=/tmp
+
+
+ mysqlsh -u${BACKUP_USER} -p${DBACKUP_PASSWORD} -h${BACKUP_HOST} -P${BACKUP_PORT} -- util dump-Instance ${BACKUP_DIR}--includeSchemas=sean,sean1
+
+
+ mysqlsh -u${BACKUP_USER} -p${DBACKUP_PASSWORD} -h${BACKUP_HOST} -P${BACKUP_PORT} -- util dump-schemas sean,sean1 --outputUrl=${BACKUP_DIR}
+
+
+ kubectl create job --from=cronjob/sean-mysql-backup my-cronjob-manual

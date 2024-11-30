@@ -1,0 +1,114 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "mysql-backup.fullname" . }}
+  labels:
+    {{- include "mysql-backup.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.schedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          {{- with .Values.podAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          labels:
+            {{- include "mysql-backup.labels" . | nindent 12 }}
+            {{- with .Values.podLabels }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+        spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}        
+          serviceAccountName: {{ include "mysql-backup.serviceAccountName" . }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+        #  mysqlsh -uroot -psakila -- util dump-instance /tmp/sean
+          restartPolicy: OnFailure  #Job不能使用Always作为默认的重新启动策略
+          containers:
+          - name: {{ .Chart.Name }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            command: ["/bin/sh", "-c"]
+            args:
+            - |
+              set -x  # 启用调试模式
+              export CURRENT_DATE=$(date +"%Y-%m-%d")
+              export BACKUP_DIR=${BACKUP_DATA_DIR}/${CURRENT_DATE}
+              mkdir -p ${BACKUP_DIR}
+              # 删除 7 天前的备份  
+              for dir in ${BACKUP_DATA_DIR}/*; do  
+                  if [ -d "$dir" ]; then  
+                      # 获取目录的最后修改时间（以秒为单位）  
+                      dir_date=$(date -r "$dir" +%s)  
+                      # 获取当前日期的时间戳  
+                      current_date=$(date +%s)  
+                      # 计算目录的时间差（以天为单位）  
+                      days_diff=$(( (current_date - dir_date) / 86400 ))  
+                      
+                      # 如果目录的时间差大于 7 天，则删除该目录  
+                      if [ $days_diff -gt 7 ]; then  
+                          rm -rf "$dir"  
+                      fi  
+                  fi  
+              done  
+              # 检查 BACKUP_SCHEMAS 是否存在
+              if [ -n "$BACKUP_SCHEMAS" ]; then
+                  mysqlsh -u${BACKUP_USER} -p${DBACKUP_PASSWORD} -h${BACKUP_HOST} -P${BACKUP_PORT} -- util dump-Instance ${BACKUP_DIR} --includeSchemas=${BACKUP_SCHEMAS}
+              else
+                  mysqlsh -u${BACKUP_USER} -p${DBACKUP_PASSWORD} -h${BACKUP_HOST} -P${BACKUP_PORT} -- util dump-Instance ${BACKUP_DIR}
+              fi 
+            # command:
+            # - sh -c
+            # - set -x
+            # - mysqlsh
+            # - -u$(BACKUP_USER)
+            # - -p$(DBACKUP_PASSWORD)
+            # - -h$(BACKUP_HOST)
+            # - -P$(BACKUP_PORT)
+            # - --
+            # - util
+            # - dump-instance
+            # - $BACKUP_DATA_DIR
+            env:
+            - name: BACKUP_USER
+              value: {{ .Values.mysql.dumpProfile.user }}
+            - name: DBACKUP_PASSWORD
+              value: {{ .Values.mysql.dumpProfile.password }}
+            - name: BACKUP_HOST
+              value: {{ .Values.mysql.dumpProfile.host }}
+            - name: BACKUP_PORT
+              value: {{ .Values.mysql.dumpProfile.port | quote }}
+            - name: BACKUP_SCHEMAS
+              value: {{ .Values.mysql.dumpProfile.schemas }}
+            - name: BACKUP_DATA_DIR
+              value: {{ .Values.mysql.dumpProfile.dir }}
+            volumeMounts:
+            - mountPath: /backup
+              name: datadir
+            {{- with .Values.volumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          volumes:
+          - name: datadir
+            persistentVolumeClaim:
+              claimName: {{ include "mysql-backup.fullname" . }}
+          {{- with .Values.volumes }}
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
