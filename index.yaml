@@ -443,6 +443,23 @@ entries:
     urls:
     - https://github.com/lich158/tiexiang-base/releases/download/nfs-subdir-external-provisioner-4.0.18/nfs-subdir-external-provisioner-4.0.18.tgz
     version: 4.0.18
+  openelb:
+  - apiVersion: v2
+    appVersion: 0.6.0
+    created: "2024-11-30T01:35:23.891865343Z"
+    description: Bare Metal Load-balancer for Kubernetes Cluster
+    digest: 97ed8d0e8f8c513e71dd3739701c92d0d044f8d57fb61ca3e7b001eab2c40bf0
+    icon: https://raw.githubusercontent.com/openelb/openelb/master/docs/logo/openelb-vertical.svg
+    maintainers:
+    - email: kubesphere@gmail.com
+      name: KubeSphere
+    name: openelb
+    sources:
+    - https://github.com/openelb/openelb
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/openelb-0.6.0/openelb-0.6.0.tgz
+    version: 0.6.0
   redis-cluster:
   - apiVersion: v2
     appVersion: 0.16.1
@@ -542,4 +559,4 @@ entries:
     urls:
     - https://github.com/lich158/tiexiang-base/releases/download/zookeeper-1.1/zookeeper-1.1.tgz
     version: "1.1"
-generated: "2024-11-21T02:04:58.341724663Z"
+generated: "2024-11-30T01:35:23.891960009Z"
