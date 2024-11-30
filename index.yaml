@@ -361,6 +361,17 @@ entries:
     urls:
     - https://github.com/lich158/tiexiang-base/releases/download/minio-tenant-6.0.4/minio-tenant-6.0.4.tgz
     version: 6.0.4
+  mysql-backup:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-11-30T02:27:00.560691567Z"
+    description: A Helm chart for Kubernetes
+    digest: 35a05a6e687d0caa05567974e13f52eeca7ffad4500d19a33c524436f602d363
+    name: mysql-backup
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/mysql-backup-0.1.0/mysql-backup-0.1.0.tgz
+    version: 0.1.0
   mysql-innodbcluster:
   - apiVersion: v2
     appVersion: 8.4.3
@@ -559,4 +570,4 @@ entries:
     urls:
     - https://github.com/lich158/tiexiang-base/releases/download/zookeeper-1.1/zookeeper-1.1.tgz
     version: "1.1"
-generated: "2024-11-30T01:35:23.891960009Z"
+generated: "2024-11-30T02:27:00.560736731Z"
