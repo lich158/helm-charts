@@ -56,6 +56,16 @@ entries:
   clickhouse-cluster:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-12-03T07:59:16.453229498Z"
+    description: A Helm chart for Kubernetes
+    digest: ccf30627f292bd7c5c9879f0877622468a288a495eb99236d298ba228db09798
+    name: clickhouse-cluster
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/clickhouse-cluster-0.1.13/clickhouse-cluster-0.1.13.tgz
+    version: 0.1.13
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-11-08T06:56:09.565689435Z"
     description: A Helm chart for Kubernetes
     digest: 2edc4a971fbba1486a80a19a2f33248c1abdeb6802d04dbd9d413f6724f50c1c
@@ -177,6 +187,16 @@ entries:
   dind:
   - apiVersion: v2
     appVersion: 27.2.1-dind
+    created: "2024-12-03T07:59:16.573327655Z"
+    description: A Helm chart for Kubernetes
+    digest: 6dc88d7c9b35630297d504a656f7afb4ee5eadedee9fe4a095d7e20252de5ad4
+    name: dind
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/dind-0.1.2/dind-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 27.2.1-dind
     created: "2024-09-19T06:19:58.93179687Z"
     description: A Helm chart for Kubernetes
     digest: 766ac5ab00b455df12569118d78fe80248a80f118a25af06859d0d47b4736da1
@@ -196,6 +216,16 @@ entries:
     - https://github.com/lich158/helm-charts/releases/download/dind-0.1.0/dind-0.1.0.tgz
     version: 0.1.0
   emqx-core:
+  - apiVersion: v2
+    appVersion: "5.0"
+    created: "2024-12-03T07:59:16.663319684Z"
+    description: A Helm chart for Kubernetes
+    digest: 0399b4a82c8879ec4ec362ba6fb794b2f3280e2492e9b01b193c03e12a34eb82
+    name: emqx-core
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/emqx-core-0.1.5/emqx-core-0.1.5.tgz
+    version: 0.1.5
   - apiVersion: v2
     appVersion: "5.0"
     created: "2024-11-09T02:44:13.436421145Z"
@@ -412,6 +442,18 @@ entries:
   nacos:
   - apiVersion: v1
     appVersion: "1.0"
+    created: "2024-12-03T07:59:16.770029267Z"
+    description: A Helm chart for Kubernetes
+    digest: 3ac15f8f790bf591b6841f266d3d18e28faa15218d90f09d1cbf72a96597597b
+    maintainers:
+    - name: arrowfeng
+    - name: paderlol
+    name: nacos
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/nacos-0.1.7/nacos-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v1
+    appVersion: "1.0"
     created: "2024-11-07T07:06:55.311749866Z"
     description: A Helm chart for Kubernetes
     digest: 497d4f9add44ce66829847f65ddbab43b04ea15e6ae6434039d02eb0c340a88b
@@ -570,4 +612,4 @@ entries:
     urls:
     - https://github.com/lich158/tiexiang-base/releases/download/zookeeper-1.1/zookeeper-1.1.tgz
     version: "1.1"
-generated: "2024-11-30T02:27:00.560736731Z"
+generated: "2024-12-03T07:59:16.770215866Z"
