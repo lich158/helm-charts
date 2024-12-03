@@ -51,13 +51,20 @@ spec:
     serviceTemplates:
     - name: service-template
       generateName: "service-{chi}"
+      metadata:
+        {{- if eq .Values.service.type "LoadBalancer" }}
+        {{- with .Values.service.annotations }}
+        annotations:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- end }}
       spec:
         ports:
         - name: http
           port: 8123
         - name: tcp
           port: 9000
-        type: NodePort
+        type: {{ .Values.service.type }}
     volumeClaimTemplates:
     - name: data-volume-template
       spec:

@@ -30,7 +30,9 @@ securityContext:
   # runAsUser: 1000
 
 service:
-  type: NodePort
+  annotations: 
+    lb.kubesphere.io/v1alpha1: openelb
+  type: LoadBalancer
   port: 2375
   nodeport: 30011
 

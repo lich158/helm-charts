@@ -13,7 +13,9 @@ image:
   tag: "5"
 
 service:
-  type: NodePort
+  annotations: 
+    lb.kubesphere.io/v1alpha1: openelb
+  type: LoadBalancer
   
 volumeClaimTemplates:
   storage: 10Gi

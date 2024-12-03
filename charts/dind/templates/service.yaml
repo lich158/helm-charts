@@ -4,6 +4,12 @@ metadata:
   name: {{ include "dind.fullname" . }}
   labels:
     {{- include "dind.labels" . | nindent 4 }}
+  {{- if eq .Values.service.type "LoadBalancer" }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -11,7 +17,7 @@ spec:
       targetPort: docker
       protocol: TCP
       name: docker
-      {{- if .Values.service.nodeport }}
+      {{- if eq .Values.service.type "NodePort" }}
       nodePort: {{ .Values.service.nodeport }}
       {{- end }}
   selector:

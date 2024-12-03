@@ -49,7 +49,9 @@ persistence:
 
 service:
   #type: ClusterIP
-  type: NodePort
+  type: LoadBalancer
+  annotations: 
+    lb.kubesphere.io/v1alpha1: openelb
   port: 8848
   nodePort: 30000
 

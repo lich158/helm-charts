@@ -20,8 +20,22 @@ spec:
     spec:
         replicas: {{ .Values.replicaCount.replicant }}
   listenersServiceTemplate:
+    metadata:
+      {{- if eq .Values.service.type "LoadBalancer" }}
+      {{- with .Values.service.annotations }}
+      annotations:
+        {{- toYaml . | nindent 10 }}
+      {{- end }}
+      {{- end }}
     spec:
       type: {{ .Values.service.type }}
   dashboardServiceTemplate:
+    metadata:
+      {{- if eq .Values.service.type "LoadBalancer" }}
+      {{- with .Values.service.annotations }}
+      annotations:
+        {{- toYaml . | nindent 10 }}
+      {{- end }}
+      {{- end }}
     spec:
       type: {{ .Values.service.type }}
