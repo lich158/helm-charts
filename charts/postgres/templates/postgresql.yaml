@@ -1,0 +1,23 @@
+kind: "postgresql"
+apiVersion: "acid.zalan.do/v1"
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "postgres.labels" . | nindent 4 }}
+spec:
+  teamId: {{ .Values.teamId }}
+  postgresql:
+    version: "16"
+  numberOfInstances: 2
+  enableReplicaLoadBalancer: true
+  maintenanceWindows:
+  volume:
+    size: {{ .Values.volume.size | quote }}
+  users:
+    harbor: []
+  databases:
+    harbor: harbor
+  allowedSourceRanges: []
+  resources:
+  {{- toYaml .Values.resources | nindent 4 }}  
