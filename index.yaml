@@ -513,6 +513,40 @@ entries:
     urls:
     - https://github.com/lich158/tiexiang-base/releases/download/openelb-0.6.0/openelb-0.6.0.tgz
     version: 0.6.0
+  postgres:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-12-11T06:23:04.972446669Z"
+    description: A Helm chart for Kubernetes
+    digest: 1fabaf8a76843d9a830d436aaae519b1d3ac2a383302b6552d2dc340db6c16df
+    name: postgres
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
+    version: 0.1.0
+  postgres-operator:
+  - apiVersion: v2
+    appVersion: 1.13.0
+    created: "2024-12-11T06:23:05.096711143Z"
+    description: Postgres Operator creates and manages PostgreSQL clusters running
+      in Kubernetes
+    digest: 905920af585f512d65218843f777578862315278aad808f657e3cbf64bb89894
+    home: https://github.com/zalando/postgres-operator
+    keywords:
+    - postgres
+    - operator
+    - cloud-native
+    - patroni
+    - spilo
+    maintainers:
+    - email: opensource@zalando.de
+      name: Zalando
+    name: postgres-operator
+    sources:
+    - https://github.com/zalando/postgres-operator
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/postgres-operator-1.13.0/postgres-operator-1.13.0.tgz
+    version: 1.13.0
   redis-cluster:
   - apiVersion: v2
     appVersion: 0.16.1
@@ -612,4 +646,4 @@ entries:
     urls:
     - https://github.com/lich158/tiexiang-base/releases/download/zookeeper-1.1/zookeeper-1.1.tgz
     version: "1.1"
-generated: "2024-12-03T07:59:16.770215866Z"
+generated: "2024-12-11T06:23:05.096827701Z"
