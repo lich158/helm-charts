@@ -394,6 +394,16 @@ entries:
   mysql-backup:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-12-14T07:41:39.279487844Z"
+    description: A Helm chart for Kubernetes
+    digest: 4030e9cf39b40691d13472b20682caf17f75bb6ee3ac379e1e83938fa98dfd73
+    name: mysql-backup
+    type: application
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/mysql-backup-0.1.1/mysql-backup-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-11-30T02:27:00.560691567Z"
     description: A Helm chart for Kubernetes
     digest: 35a05a6e687d0caa05567974e13f52eeca7ffad4500d19a33c524436f602d363
@@ -666,4 +676,4 @@ entries:
     urls:
     - https://github.com/lich158/tiexiang-base/releases/download/zookeeper-1.1/zookeeper-1.1.tgz
     version: "1.1"
-generated: "2024-12-14T07:41:15.833830642Z"
+generated: "2024-12-14T07:41:39.279556332Z"
