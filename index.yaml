@@ -608,6 +608,26 @@ entries:
   synology-csi:
   - apiVersion: v2
     appVersion: v1.2.0
+    created: "2024-12-14T07:41:15.83373264Z"
+    description: A Helm chart for the Synology CSI Driver
+    digest: 8f3de5df5ea1273de0193baa60945eb394c7424ccaafa7e7fb5b68cbfb9a35e6
+    home: https://github.com/christian-schlichtherle/synology-csi-chart
+    keywords:
+    - Synology
+    - CSI Driver
+    kubeVersion: '>= 1.20.0'
+    maintainers:
+    - name: Christian Schlichtherle
+      url: https://github.com/christian-schlichtherle
+    name: synology-csi
+    sources:
+    - https://github.com/christian-schlichtherle/synology-csi-chart/tree/main
+    - https://github.com/SynologyOpenSource/synology-csi/tree/main
+    urls:
+    - https://github.com/lich158/tiexiang-base/releases/download/synology-csi-0.10.2/synology-csi-0.10.2.tgz
+    version: 0.10.2
+  - apiVersion: v2
+    appVersion: v1.2.0
     created: "2024-11-19T06:02:15.699384023Z"
     description: A Helm chart for the Synology CSI Driver
     digest: eb46ed6ff9a411c53686e99776d54fd882d05c09b3ce3c4c37d715daee6fda50
@@ -646,4 +666,4 @@ entries:
     urls:
     - https://github.com/lich158/tiexiang-base/releases/download/zookeeper-1.1/zookeeper-1.1.tgz
     version: "1.1"
-generated: "2024-12-11T06:23:05.096827701Z"
+generated: "2024-12-14T07:41:15.833830642Z"
